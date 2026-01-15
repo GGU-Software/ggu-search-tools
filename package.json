@@ -1,0 +1,18 @@
+{
+  "name": "ggu-search-tools",
+  "version": "1.0.0",
+  "description": "Crawl and index GGU documentation for semantic search (Firecrawl + Pinecone)",
+  "type": "module",
+  "scripts": {
+    "crawl": "bun run scripts/crawl.ts",
+    "upload": "bun run scripts/upload.ts",
+    "sync": "bun run scripts/crawl.ts && bun run scripts/upload.ts"
+  },
+  "dependencies": {
+    "@pinecone-database/pinecone": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

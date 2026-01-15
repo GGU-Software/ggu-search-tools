@@ -1,0 +1,25 @@
+{
+  "firecrawl": {
+    "apiKey": "fc-your-api-key-here"
+  },
+  "pinecone": {
+    "apiKey": "pcsk_your-api-key-here",
+    "assistantName": "ggu-software-public-search"
+  },
+  "sources": [
+    {
+      "name": "product-website",
+      "url": "https://www.ggu-software.com",
+      "excludePaths": ["/en/*"],
+      "limit": 500
+    },
+    {
+      "name": "user-manuals",
+      "url": "https://manuals.ggu-software.com/ger/",
+      "limit": 6000
+    }
+  ],
+  "output": {
+    "directory": "./output"
+  }
+}
