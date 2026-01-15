@@ -148,7 +148,7 @@ function loadMarkdownFiles(outputDir: string, sourceName?: string): MarkdownFile
 // ============================================================================
 
 async function clearAssistantFiles(
-  assistant: ReturnType<Pinecone["assistant"]>
+  assistant: ReturnType<Pinecone["Assistant"]>
 ): Promise<void> {
   console.log("\nClearing existing files from assistant...");
 
@@ -174,7 +174,7 @@ async function clearAssistantFiles(
 }
 
 async function uploadFiles(
-  assistant: ReturnType<Pinecone["assistant"]>,
+  assistant: ReturnType<Pinecone["Assistant"]>,
   files: MarkdownFile[]
 ): Promise<void> {
   console.log(`\nUploading ${files.length} files to Pinecone Assistant...`);
@@ -184,21 +184,29 @@ async function uploadFiles(
 
   for (const file of files) {
     try {
-      // Create a Blob from the content with metadata in the filename
-      // Pinecone Assistant extracts metadata from the file content
+      // Create content with metadata header
       const contentWithMetadata = `# ${file.metadata.title || "Document"}
 
 Source: ${file.metadata.url || "Unknown"}
 
 ${file.content}`;
 
-      // Upload using the SDK
-      // Note: The SDK expects a file path or File object
-      // We'll create a temporary approach using the content directly
-      const blob = new Blob([contentWithMetadata], { type: "text/markdown" });
-      const fileObj = new File([blob], file.filename, { type: "text/markdown" });
+      // Write to temp file for upload
+      const tempPath = `./output/.temp_${file.filename}`;
+      const { writeFileSync, unlinkSync } = await import("fs");
+      writeFileSync(tempPath, contentWithMetadata);
 
-      await assistant.uploadFile(fileObj);
+      // Upload using the SDK
+      await assistant.uploadFile({
+        path: tempPath,
+        metadata: {
+          source: file.metadata.source || "unknown",
+          url: file.metadata.url || "",
+        },
+      });
+
+      // Clean up temp file
+      unlinkSync(tempPath);
 
       uploaded++;
       process.stdout.write(`\r  Progress: ${uploaded}/${files.length} uploaded`);
@@ -238,7 +246,7 @@ async function main() {
     apiKey: config.pinecone.apiKey,
   });
 
-  const assistant = pinecone.assistant(config.pinecone.assistantName);
+  const assistant = pinecone.Assistant(config.pinecone.assistantName);
   console.log(`  Assistant: ${config.pinecone.assistantName}`);
 
   // Clear existing files if requested
