@@ -17,7 +17,13 @@
  */
 
 import { existsSync, mkdirSync, writeFileSync, readFileSync, unlinkSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+// Get script directory (works in both Bun and Node.js)
+const __dirname = typeof import.meta.dir === "string"
+  ? import.meta.dir
+  : dirname(fileURLToPath(import.meta.url));
 
 // ============================================================================
 // Types
@@ -89,7 +95,7 @@ interface Checkpoint {
 const CHECKPOINT_VERSION = 1;
 
 function loadConfig(): Config {
-  const configPath = join(import.meta.dir, "..", "config.json");
+  const configPath = join(__dirname, "..", "config.json");
 
   if (!existsSync(configPath)) {
     console.error("Error: config.json not found");
@@ -101,7 +107,7 @@ function loadConfig(): Config {
 }
 
 function getCheckpointPath(): string {
-  return join(import.meta.dir, "..", "output", ".crawl-checkpoint.json");
+  return join(__dirname, "..", "output", ".crawl-checkpoint.json");
 }
 
 function loadCheckpoint(): Checkpoint {
@@ -123,7 +129,7 @@ function loadCheckpoint(): Checkpoint {
 
 function saveCheckpoint(checkpoint: Checkpoint): void {
   const path = getCheckpointPath();
-  const dir = join(import.meta.dir, "..", "output");
+  const dir = join(__dirname, "..", "output");
 
   if (!existsSync(dir)) {
     mkdirSync(dir, { recursive: true });

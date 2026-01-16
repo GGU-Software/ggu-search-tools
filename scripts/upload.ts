@@ -17,8 +17,14 @@
  */
 
 import { existsSync, readdirSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import { Pinecone } from "@pinecone-database/pinecone";
+
+// Get script directory (works in both Bun and Node.js)
+const __dirname = typeof import.meta.dir === "string"
+  ? import.meta.dir
+  : dirname(fileURLToPath(import.meta.url));
 
 // ============================================================================
 // Types
@@ -71,13 +77,35 @@ interface UploadCheckpoint {
 }
 
 // ============================================================================
+// Rate Limiting Configuration
+// ============================================================================
+
+// Pinecone Assistant rate limits (uploads per minute):
+// - Starter: 5/min (12 sec delay)
+// - Standard: 20/min (3 sec delay)
+// - Enterprise: 300/min (0.2 sec delay)
+const PINECONE_PLAN: "starter" | "standard" | "enterprise" = "standard";
+
+const RATE_LIMIT_DELAYS: Record<typeof PINECONE_PLAN, number> = {
+  starter: 12000,    // 12 seconds = 5 uploads/min
+  standard: 3000,    // 3 seconds = 20 uploads/min
+  enterprise: 200,   // 0.2 seconds = 300 uploads/min
+};
+
+const UPLOAD_DELAY_MS = RATE_LIMIT_DELAYS[PINECONE_PLAN];
+
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// ============================================================================
 // Config & Checkpoint
 // ============================================================================
 
 const CHECKPOINT_VERSION = 1;
 
 function loadConfig(): Config {
-  const configPath = join(import.meta.dir, "..", "config.json");
+  const configPath = join(__dirname, "..", "config.json");
 
   if (!existsSync(configPath)) {
     console.error("Error: config.json not found");
@@ -89,7 +117,7 @@ function loadConfig(): Config {
 }
 
 function getCheckpointPath(): string {
-  return join(import.meta.dir, "..", "output", ".upload-checkpoint.json");
+  return join(__dirname, "..", "output", ".upload-checkpoint.json");
 }
 
 function loadCheckpoint(): UploadCheckpoint {
@@ -111,7 +139,7 @@ function loadCheckpoint(): UploadCheckpoint {
 
 function saveCheckpoint(checkpoint: UploadCheckpoint): void {
   const path = getCheckpointPath();
-  const dir = join(import.meta.dir, "..", "output");
+  const dir = join(__dirname, "..", "output");
 
   if (!existsSync(dir)) {
     mkdirSync(dir, { recursive: true });
@@ -240,7 +268,15 @@ async function uploadFiles(
   sourceName: string,
   checkpoint: UploadCheckpoint
 ): Promise<{ uploaded: number; skipped: number; failed: number }> {
+  // Calculate how many files need uploading (not already in checkpoint)
+  const existingUploaded = new Set(checkpoint.uploads[sourceName]?.uploadedFiles || []);
+  const filesToUpload = files.filter(f => !existingUploaded.has(f.path)).length;
+  const estimatedMinutes = Math.ceil((filesToUpload * UPLOAD_DELAY_MS) / 60000);
+
   console.log(`\nUploading ${files.length} files to Pinecone Assistant...`);
+  if (filesToUpload > 0) {
+    console.log(`  ${filesToUpload} files to upload, estimated time: ~${estimatedMinutes} minutes`);
+  }
 
   // Initialize or get existing checkpoint for this source
   if (!checkpoint.uploads[sourceName]) {
@@ -303,6 +339,9 @@ ${file.content}`;
 
       const total = uploaded + skipped;
       process.stdout.write(`\r  Progress: ${total}/${files.length} (${uploaded} uploaded, ${skipped} skipped)`);
+
+      // Rate limiting: wait before next upload to respect Pinecone limits
+      await sleep(UPLOAD_DELAY_MS);
     } catch (error) {
       failed++;
       uploadState.failedFiles.push(file.path);
@@ -371,6 +410,7 @@ async function main() {
 
   const assistant = pinecone.Assistant(config.pinecone.assistantName);
   console.log(`  Assistant: ${config.pinecone.assistantName}`);
+  console.log(`  Rate limit: ${PINECONE_PLAN} plan (${UPLOAD_DELAY_MS/1000}s delay between uploads)`);
 
   // Clear existing files if requested
   if (shouldClear) {
