@@ -117,22 +117,51 @@ description: "Page description"
 
 ## Claude Code Integration
 
-After uploading, the documentation is searchable in Claude Code via the `ggu-public-docs` MCP server:
+After uploading, the documentation is searchable in Claude Code via the `ggu-public-docs` MCP server.
 
-```json
-// .mcp.json
-{
-  "mcpServers": {
-    "ggu-public-docs": {
-      "type": "http",
-      "url": "https://prod-1-data.ke.pinecone.io/mcp/assistants/ggu-software-public-search",
-      "headers": {
-        "Authorization": "Bearer ${PINECONE_API_KEY}"
-      }
-    }
-  }
-}
+### Setup
+
+1. **Get the API Key:**
+
+   A read-only API key is available for GGU colleagues in Bitwarden:
+   - [Pinecone Read-Only API Key](https://vault.bitwarden.eu/#/vault?action=view&itemId=4c7df23b-bf77-43dd-8d24-b3d40159dc1a)
+
+2. **Add to your `.mcp.json`:**
+
+   Copy the example configuration:
+   ```bash
+   cp .mcp.example.json /path/to/your/workspace/.mcp.json
+   ```
+
+   Or add manually to your existing `.mcp.json`:
+   ```json
+   {
+     "mcpServers": {
+       "ggu-public-docs": {
+         "type": "http",
+         "url": "https://prod-1-data.ke.pinecone.io/mcp/assistants/ggu-software-public-search",
+         "headers": {
+           "Authorization": "Bearer YOUR_PINECONE_API_KEY_HERE"
+         }
+       }
+     }
+   }
+   ```
+
+   Replace `YOUR_PINECONE_API_KEY_HERE` with the API key from Bitwarden.
+
+3. **Restart Claude Code** to load the new MCP server.
+
+### Usage in Claude Code
+
+Once configured, you can search GGU documentation directly:
+
 ```
+Search documentation: "GGU-RETAIN Normen"
+Search documentation: "BIM Export GGU-CONNECT"
+```
+
+The MCP server provides the `get_context` tool which returns relevant document snippets from the indexed documentation.
 
 ## Update Process
 
