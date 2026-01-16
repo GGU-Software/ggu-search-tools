@@ -4,15 +4,20 @@
  * This script reads markdown files from the output directory
  * and uploads them to the Pinecone Assistant for indexing.
  *
+ * Features:
+ * - Checkpoint/Resume: Saves progress, can resume after interruption
+ * - Rate limiting: Respects API limits
+ *
  * Usage:
  *   bun run upload
  *   bun run scripts/upload.ts
  *   bun run scripts/upload.ts --source product-website
- *   bun run scripts/upload.ts --clear  # Clear existing files first
+ *   bun run scripts/upload.ts --resume  # Resume interrupted upload
+ *   bun run scripts/upload.ts --clear   # Clear existing files first
  */
 
-import { existsSync, readdirSync, readFileSync } from "fs";
-import { join, basename } from "path";
+import { existsSync, readdirSync, readFileSync, writeFileSync, unlinkSync, mkdirSync } from "fs";
+import { join } from "path";
 import { Pinecone } from "@pinecone-database/pinecone";
 
 // ============================================================================
@@ -50,9 +55,26 @@ interface MarkdownFile {
   };
 }
 
+interface UploadCheckpoint {
+  version: number;
+  uploads: {
+    [sourceName: string]: {
+      status: "started" | "in_progress" | "completed" | "failed";
+      startedAt: string;
+      completedAt?: string;
+      totalFiles: number;
+      uploadedFiles: string[];  // List of uploaded file paths
+      failedFiles: string[];    // List of failed file paths
+      error?: string;
+    };
+  };
+}
+
 // ============================================================================
-// Config
+// Config & Checkpoint
 // ============================================================================
+
+const CHECKPOINT_VERSION = 1;
 
 function loadConfig(): Config {
   const configPath = join(import.meta.dir, "..", "config.json");
@@ -64,6 +86,44 @@ function loadConfig(): Config {
   }
 
   return JSON.parse(readFileSync(configPath, "utf-8"));
+}
+
+function getCheckpointPath(): string {
+  return join(import.meta.dir, "..", "output", ".upload-checkpoint.json");
+}
+
+function loadCheckpoint(): UploadCheckpoint {
+  const path = getCheckpointPath();
+
+  if (existsSync(path)) {
+    try {
+      const data = JSON.parse(readFileSync(path, "utf-8"));
+      if (data.version === CHECKPOINT_VERSION) {
+        return data;
+      }
+    } catch {
+      // Corrupted checkpoint, start fresh
+    }
+  }
+
+  return { version: CHECKPOINT_VERSION, uploads: {} };
+}
+
+function saveCheckpoint(checkpoint: UploadCheckpoint): void {
+  const path = getCheckpointPath();
+  const dir = join(import.meta.dir, "..", "output");
+
+  if (!existsSync(dir)) {
+    mkdirSync(dir, { recursive: true });
+  }
+
+  writeFileSync(path, JSON.stringify(checkpoint, null, 2), "utf-8");
+}
+
+function clearCheckpoint(sourceName: string): void {
+  const checkpoint = loadCheckpoint();
+  delete checkpoint.uploads[sourceName];
+  saveCheckpoint(checkpoint);
 }
 
 // ============================================================================
@@ -109,6 +169,7 @@ function loadMarkdownFiles(outputDir: string, sourceName?: string): MarkdownFile
     ? [sourceName]
     : readdirSync(outputDir, { withFileTypes: true })
         .filter((d) => d.isDirectory())
+        .filter((d) => !d.name.startsWith("."))  // Skip hidden directories
         .map((d) => d.name);
 
   for (const sourceDir of sourceDirs) {
@@ -175,14 +236,41 @@ async function clearAssistantFiles(
 
 async function uploadFiles(
   assistant: ReturnType<Pinecone["Assistant"]>,
-  files: MarkdownFile[]
-): Promise<void> {
+  files: MarkdownFile[],
+  sourceName: string,
+  checkpoint: UploadCheckpoint
+): Promise<{ uploaded: number; skipped: number; failed: number }> {
   console.log(`\nUploading ${files.length} files to Pinecone Assistant...`);
 
+  // Initialize or get existing checkpoint for this source
+  if (!checkpoint.uploads[sourceName]) {
+    checkpoint.uploads[sourceName] = {
+      status: "started",
+      startedAt: new Date().toISOString(),
+      totalFiles: files.length,
+      uploadedFiles: [],
+      failedFiles: [],
+    };
+    saveCheckpoint(checkpoint);
+  }
+
+  const uploadState = checkpoint.uploads[sourceName];
+  uploadState.status = "in_progress";
+  uploadState.totalFiles = files.length;
+
+  const alreadyUploaded = new Set(uploadState.uploadedFiles);
+
   let uploaded = 0;
+  let skipped = 0;
   let failed = 0;
 
   for (const file of files) {
+    // Skip already uploaded files
+    if (alreadyUploaded.has(file.path)) {
+      skipped++;
+      continue;
+    }
+
     try {
       // Create content with metadata header
       const contentWithMetadata = `# ${file.metadata.title || "Document"}
@@ -193,7 +281,6 @@ ${file.content}`;
 
       // Write to temp file for upload
       const tempPath = `./output/.temp_${file.filename}`;
-      const { writeFileSync, unlinkSync } = await import("fs");
       writeFileSync(tempPath, contentWithMetadata);
 
       // Upload using the SDK
@@ -209,17 +296,40 @@ ${file.content}`;
       unlinkSync(tempPath);
 
       uploaded++;
-      process.stdout.write(`\r  Progress: ${uploaded}/${files.length} uploaded`);
+      uploadState.uploadedFiles.push(file.path);
+
+      // Save checkpoint after each successful upload
+      saveCheckpoint(checkpoint);
+
+      const total = uploaded + skipped;
+      process.stdout.write(`\r  Progress: ${total}/${files.length} (${uploaded} uploaded, ${skipped} skipped)`);
     } catch (error) {
       failed++;
+      uploadState.failedFiles.push(file.path);
+      saveCheckpoint(checkpoint);
       console.error(`\n  Failed to upload ${file.filename}:`, error);
     }
   }
 
+  // Update final status
+  if (failed === 0) {
+    uploadState.status = "completed";
+    uploadState.completedAt = new Date().toISOString();
+  } else {
+    uploadState.status = "failed";
+    uploadState.error = `${failed} files failed to upload`;
+  }
+  saveCheckpoint(checkpoint);
+
   console.log(`\n\n  Uploaded: ${uploaded}`);
+  if (skipped > 0) {
+    console.log(`  Skipped (already uploaded): ${skipped}`);
+  }
   if (failed > 0) {
     console.log(`  Failed: ${failed}`);
   }
+
+  return { uploaded, skipped, failed };
 }
 
 // ============================================================================
@@ -228,10 +338,11 @@ ${file.content}`;
 
 async function main() {
   console.log("=".repeat(60));
-  console.log("GGU Documentation Uploader");
+  console.log("GGU Documentation Uploader (with Checkpoint/Resume)");
   console.log("=".repeat(60));
 
   const config = loadConfig();
+  const checkpoint = loadCheckpoint();
 
   // Parse command line args
   const args = process.argv.slice(2);
@@ -239,6 +350,18 @@ async function main() {
     ? args[args.indexOf("--source") + 1]
     : undefined;
   const shouldClear = args.includes("--clear");
+  const resumeMode = args.includes("--resume");
+
+  // Show checkpoint status
+  const existingUploads = Object.entries(checkpoint.uploads)
+    .filter(([, u]) => u.status === "in_progress" || u.status === "completed");
+
+  if (existingUploads.length > 0) {
+    console.log("\nCheckpoint status:");
+    for (const [name, upload] of existingUploads) {
+      console.log(`  - ${name}: ${upload.status} (${upload.uploadedFiles.length}/${upload.totalFiles} files)`);
+    }
+  }
 
   // Initialize Pinecone client
   console.log("\nConnecting to Pinecone...");
@@ -252,6 +375,11 @@ async function main() {
   // Clear existing files if requested
   if (shouldClear) {
     await clearAssistantFiles(assistant);
+    // Also clear checkpoint when clearing files
+    for (const sourceName of Object.keys(checkpoint.uploads)) {
+      delete checkpoint.uploads[sourceName];
+    }
+    saveCheckpoint(checkpoint);
   }
 
   // Load markdown files
@@ -269,20 +397,55 @@ async function main() {
   // Group by source
   const bySource = files.reduce((acc, f) => {
     const source = f.metadata.source || "unknown";
-    acc[source] = (acc[source] || 0) + 1;
+    if (!acc[source]) acc[source] = [];
+    acc[source].push(f);
     return acc;
-  }, {} as Record<string, number>);
+  }, {} as Record<string, MarkdownFile[]>);
 
-  for (const [source, count] of Object.entries(bySource)) {
-    console.log(`    - ${source}: ${count} files`);
+  for (const [source, sourceFiles] of Object.entries(bySource)) {
+    const existingUpload = checkpoint.uploads[source];
+    const uploadedCount = existingUpload?.uploadedFiles.length || 0;
+    console.log(`    - ${source}: ${sourceFiles.length} files (${uploadedCount} already uploaded)`);
   }
 
-  // Upload to Pinecone
-  await uploadFiles(assistant, files);
+  // Upload to Pinecone (by source for better checkpoint granularity)
+  let totalUploaded = 0;
+  let totalSkipped = 0;
+  let totalFailed = 0;
+
+  for (const [source, sourceFiles] of Object.entries(bySource)) {
+    // Check if already completed
+    const existingUpload = checkpoint.uploads[source];
+    if (existingUpload?.status === "completed" && !resumeMode) {
+      console.log(`\nSkipping ${source} (already completed)`);
+      console.log(`  Use --clear to re-upload`);
+      totalSkipped += sourceFiles.length;
+      continue;
+    }
+
+    console.log(`\n--- Uploading source: ${source} ---`);
+    const result = await uploadFiles(assistant, sourceFiles, source, checkpoint);
+    totalUploaded += result.uploaded;
+    totalSkipped += result.skipped;
+    totalFailed += result.failed;
+
+    // Clear checkpoint for completed source
+    if (result.failed === 0) {
+      clearCheckpoint(source);
+    }
+  }
 
   console.log("\n" + "=".repeat(60));
   console.log("Upload complete!");
-  console.log("Files are now being indexed by Pinecone Assistant.");
+  console.log(`  Total uploaded: ${totalUploaded}`);
+  if (totalSkipped > 0) {
+    console.log(`  Total skipped: ${totalSkipped}`);
+  }
+  if (totalFailed > 0) {
+    console.log(`  Total failed: ${totalFailed}`);
+    console.log("  You can resume with: bun run upload --resume");
+  }
+  console.log("\nFiles are now being indexed by Pinecone Assistant.");
   console.log("This may take a few minutes before they are searchable.");
   console.log("=".repeat(60));
 }
