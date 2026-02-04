@@ -223,7 +223,7 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
     return documents
 
 
-def upload_to_pinecone(documents: list[dict], dry_run: bool = True):
+def upload_to_pinecone(documents: list[dict], dry_run: bool = True, clear_first: bool = False):
     """Upload documents to Pinecone Assistant."""
     from src.config import get_settings
     from src.pinecone import PineconeAssistant
@@ -243,12 +243,18 @@ def upload_to_pinecone(documents: list[dict], dry_run: bool = True):
     print('=' * 60)
     print(f"  Assistant: {settings.pinecone_assistant_name}")
     print(f"  Documents: {len(documents)}")
+    if clear_first:
+        print(f"  Clear existing: YES")
 
     if dry_run:
         print("\n[DRY RUN] Would upload the following documents:")
+        if clear_first:
+            print("  (Would first delete all existing files)")
         for doc in documents:
             print(f"  - {doc['filename']}")
         print("\nTo actually upload, run with --upload --confirm")
+        if not clear_first:
+            print("Add --clear to delete existing files first (prevents duplicates)")
         return
 
     print("\n[CONFIRMED] Proceeding with upload...")
@@ -258,6 +264,12 @@ def upload_to_pinecone(documents: list[dict], dry_run: bool = True):
         api_key=settings.pinecone_api_key,
         assistant_name=settings.pinecone_assistant_name,
     )
+
+    # Clear existing files if requested
+    if clear_first:
+        print("\nClearing existing files...")
+        deleted = assistant.clear_all_files()
+        print(f"  Deleted {deleted} existing files")
 
     # Upload progress callback
     def on_progress(uploaded, total, filename):
@@ -483,6 +495,7 @@ def main():
     parser.add_argument("--validate", action="store_true", help="Validate extracted markdown")
     parser.add_argument("--prepare", action="store_true", help="Prepare upload batch (dry run)")
     parser.add_argument("--upload", action="store_true", help="Upload to Pinecone")
+    parser.add_argument("--clear", action="store_true", help="Clear existing files before upload (prevents duplicates)")
     parser.add_argument("--confirm", action="store_true", help="Confirm upload (required with --upload)")
 
     args = parser.parse_args()
@@ -520,7 +533,7 @@ def main():
     elif args.upload:
         documents = prepare_upload(output_dir, config_dir / "indexing.yaml")
         if documents:
-            upload_to_pinecone(documents, dry_run=not args.confirm)
+            upload_to_pinecone(documents, dry_run=not args.confirm, clear_first=args.clear)
 
     else:
         parser.print_help()
@@ -531,6 +544,9 @@ def main():
         print("  4. python scripts/pipeline.py --validate       # Validate content quality")
         print("  5. python scripts/pipeline.py --prepare        # Preview upload")
         print("  6. python scripts/pipeline.py --upload --confirm  # Upload to Pinecone")
+        print("")
+        print("Re-upload with updated metadata (e.g., after adding web_url):")
+        print("  python scripts/pipeline.py --upload --clear --confirm  # Clear & re-upload")
 
 
 if __name__ == "__main__":
