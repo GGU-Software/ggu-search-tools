@@ -15,6 +15,7 @@ norms:
   item_id: 01F33FSKVB3Z3VSRPKOJDIRKHCJCVIIKK5
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%201054_2021-04%20(Sicherheitsnachweise%20in%20Erd-%20und%20Grundbau).pdf
 - id: DIN 4017
   description: Grundbruchberechnungen
   category: geotechnical
@@ -28,6 +29,7 @@ norms:
   item_id: 01F33FSKXQ2USLPCX6UFA3V4UR6IGNIZWI
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204017_2026-02%20(Grundbruchwiderstand%20Flachgr%C3%BCndungen).pdf
 - id: DIN 4019
   description: Setzungsberechnungen
   category: geotechnical
@@ -41,6 +43,7 @@ norms:
   item_id: 01F33FSKWDVHJ35K4TYZFKUK7TWKXQPAAK
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204019_2015-05%20(Setzungsberechnungen).pdf
 - id: DIN 4084
   description: Böschungs- und Geländebruchberechnungen
   category: geotechnical
@@ -54,6 +57,7 @@ norms:
   item_id: 01F33FSKSACUALYNF4CZA3PUR6WLJCXY3G
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204084_Beiblatt%201_2023-02%20(Gel%C3%A4ndebruchberechnungen).pdf
 - id: DIN 4085
   description: Erddruckberechnungen
   category: geotechnical
@@ -67,6 +71,7 @@ norms:
   item_id: 01F33FSKQFGFJUVVMGABBYMOMZ4QGM7QCO
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204085_2017-08%20(Berechnung%20des%20Erddrucks).pdf
 - id: DIN 4093
   description: Bemessung von verfestigten Bodenkörpern
   category: geotechnical
@@ -80,6 +85,7 @@ norms:
   item_id: 01F33FSKXMXB54DHT2OBBYBFNXBYBU6OVU
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204093_2015-11%20(Bemes.%20von%20verfestigten%20Bodenk%C3%B6rpern).pdf
 - id: DIN 4094
   description: Felduntersuchungen (Sondierungen)
   category: field_testing
@@ -93,6 +99,7 @@ norms:
   item_id: 01F33FSKXSHENXBSFDOFCIRGHHEEI67OSG
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/000_Eingang/DIN%20von%20BN....werden%20noch%20einsortiert/DIN%204094-2.pdf
 - id: DIN EN 1997-1
   description: Eurocode 7 (German National Annex)
   category: eurocode
@@ -107,6 +114,7 @@ norms:
   item_id: 01F33FSKQ7QYBB44TK7ZAKH3A2Z3NGT6AA
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201997-1_2014-03%20(Entwurf,%20Berechnung%20und%20Bemessung%20in%20der%20Geotechnik-%20Allg.%20Regeln).pdf
 - id: DIN 18196
   description: Bodenklassifikation für bautechnische Zwecke
   category: classification
@@ -120,6 +128,7 @@ norms:
   item_id: 01F33FSKUDXBR7FIRGLFD36VS42TI2YM3S
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018196_2023-02%20(Bodenklassifikation%20f%C3%BCr%20bautechnische%20Zwecke).pdf
 - id: DIN EN ISO 14688-1
   description: Benennung, Beschreibung und Klassifizierung von Boden - Teil 1
   category: classification
@@ -133,6 +142,7 @@ norms:
   item_id: 01F33FSKWMEVXNUCQCPBFZY7PK2A34BMTJ
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2014688-1_2020-11%20(Benennung%20und%20Beschreibung%20von%20Boden).pdf
 - id: DIN EN ISO 14688-2
   description: Benennung, Beschreibung und Klassifizierung von Boden - Teil 2
   category: classification
@@ -146,6 +156,7 @@ norms:
   item_id: 01F33FSKQXSURQZJ6R2JH2B7J5WSKNHACA
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2014688-2_2020-11%20(Klassifizierung%20von%20Boden).pdf
 - id: DIN EN ISO 14689
   description: Benennung, Beschreibung und Klassifizierung von Fels
   category: classification
@@ -160,6 +171,7 @@ norms:
   item_id: 01F33FSKVNWMJZWAGXTRAKHXQWD3MLMRMN
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2014689_2018-05%20(Geotechn.%20Erkundung%20-%20Klassifizierung%20von%20Fels).pdf
 - id: DIN 18122
   description: Zustandsgrenzen (Atterberg-Grenzen)
   category: lab_tests
@@ -173,6 +185,7 @@ norms:
   item_id: 01F33FSKVKCFKBTKO7GVEYXZCYADBXIXDP
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018122-2_2020-11%20(Best.%20der%20Schrumpfgrenze).pdf
 - id: DIN 18123
   description: Korngrößenverteilung
   category: lab_tests
@@ -186,6 +199,7 @@ norms:
   item_id: 01F33FSKVEN43DGCPSK5DJ5QBK554HTKA7
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/Normen%20zur%C3%BCckgezogen/DIN%2018123_2011-04%20(Korngr%C3%B6%C3%9Fenverteilung)_zur%C3%BCckgezogen.pdf
 - id: DIN 18124
   description: Korndichte
   category: lab_tests
@@ -199,6 +213,7 @@ norms:
   item_id: 01F33FSKQIK5URFVRV6ZDIWSTCSNXSXZVZ
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018124_2019-02%20(Korndichte).PDF
 - id: DIN 18125
   description: Dichte des Bodens
   category: lab_tests
@@ -212,6 +227,7 @@ norms:
   item_id: 01F33FSKW57PY4LXWWEVCKTF4VTAKZOLUA
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018125-2_2020-11%20(Bestimmung%20der%20Dichte-Feldversuch).pdf
 - id: DIN 18127
   description: Proctorversuch
   category: lab_tests
@@ -225,6 +241,7 @@ norms:
   item_id: 01F33FSKUHEPVRAXE4WNALB6AHCALAKPZX
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018127_2012-09%20%20(Proctorversuch).pdf
 - id: DIN 18128
   description: Glühverlust
   category: lab_tests
@@ -238,6 +255,7 @@ norms:
   item_id: 01F33FSKW26VSLBX6FZVCYAB6OE2GVMLQQ
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/000_Eingang/DIN%20von%20BN....werden%20noch%20einsortiert/DIN%2018128.pdf
 - id: DIN 18129
   description: Kalkgehalt
   category: lab_tests
@@ -251,6 +269,7 @@ norms:
   item_id: 01F33FSKT5ME5LNG6VIVFKL6DMONDGSPXG
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018129_2011-07%20(Kalkgehaltsbestimmung).pdf
 - id: DIN 18130
   description: Wasserdurchlässigkeit
   category: lab_tests
@@ -264,6 +283,7 @@ norms:
   item_id: 01F33FSKQG2ZRCICFDPNCYZ6D4DPEL7ZMY
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018130-2_2015-08%20(Wasserdurchl%C3%A4ssigkeitsbeiwert%20-%20Feldversuch).pdf
 - id: DIN 18132
   description: Wasseraufnahmevermögen
   category: lab_tests
@@ -277,6 +297,7 @@ norms:
   item_id: 01F33FSKUISURRBUNGENGIXZ3XEIPSCOMR
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018132_2012-04%20(Wasseraufnahmeverm%C3%B6gen).pdf
 - id: DIN 18134
   description: Plattendruckversuch
   category: lab_tests
@@ -290,6 +311,7 @@ norms:
   item_id: 01F33FSKQS7WUE7UNZPBGJUGK4BQK4BTOD
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018134_2012-04%20(Plattendruckversuch).pdf
 - id: DIN 18136
   description: Einaxialer Druckversuch
   category: lab_tests
@@ -303,6 +325,7 @@ norms:
   item_id: 01F33FSKQN567BTKIKMRGYAQGQ3QAOUUPD
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/000_Eingang/DIN%20von%20BN....werden%20noch%20einsortiert/DIN%2018136.pdf
 - id: DIN 18137
   description: Scherfestigkeit
   category: lab_tests
@@ -316,6 +339,7 @@ norms:
   item_id: 01F33FSKUYKNDWFJVX6ZGZDZUWBMIP7WRZ
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018137-1_2010-07%20(Bestimmung%20der%20Scherfestigkeit).pdf
 - id: DIN 18141
   description: Baugrunderkundung durch Schürfe
   category: field_testing
@@ -329,6 +353,7 @@ norms:
   item_id: 01F33FSKQ5FBLODMBGYVGY4WBTN7F7TLEE
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018141-1_2014-05%20(Best.der%20einaxialen%20Druckfestigkeit).pdf
 - id: DIN EN ISO 17892-1
   description: Bestimmung des Wassergehalts
   category: lab_tests
@@ -342,6 +367,7 @@ norms:
   item_id: 01F33FSKQHL22NLY32XFH3INXRUCVHUEGP
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-1_2022-08%20(Bestimmung%20des%20Wassergehalts).pdf
 - id: DIN EN ISO 17892-2
   description: Bestimmung der Dichte des Bodens
   category: lab_tests
@@ -355,6 +381,7 @@ norms:
   item_id: 01F33FSKS4VLZIT6PD6JBKQKH5HSSGALJX
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-2_2015-03%20(Bestimung%20der%20Dichte%20des%20Bodens).pdf
 - id: DIN EN ISO 17892-4
   description: Bestimmung der Korngrößenverteilung
   category: lab_tests
@@ -368,6 +395,7 @@ norms:
   item_id: 01F33FSKVJ7GLYRAH6DNCZ45GENGD53GEB
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-4_2017-04%20(Korngr%C3%B6%C3%9Fenverteilung).pdf
 - id: DIN EN ISO 17892-12
   description: Bestimmung der Zustandsgrenzen
   category: lab_tests
@@ -381,6 +409,7 @@ norms:
   item_id: 01F33FSKXWQR6SPK4AJBDYSQZR4EM5KMBA
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-12_2022-08%20(Bestimmung%20der%20Flie%C3%9F-%20und%20Ausrollgrenze).pdf
 - id: DIN EN ISO 22476-1
   description: CPT - Drucksondierung
   category: field_testing
@@ -394,6 +423,7 @@ norms:
   item_id: 01F33FSKR3Q764GI2KCFC2ZSQ4GKCURTFO
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2022476-1_2013-10%20(Drucksondierungen%20mit%20elektr.Messwertaufnehmern-Porenwasserdruck).pdf
 - id: DIN EN ISO 22476-2
   description: Rammsondierung
   category: field_testing
@@ -407,6 +437,7 @@ norms:
   item_id: 01F33FSKUG2CZURIGKEBHYGIWAP37TDP2M
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2022476-2_2012-03%20(Geotechn.%20Erkundung%20-%20Rammsondierungen).pdf
 - id: DIN EN ISO 22476-3
   description: Standard Penetration Test (SPT)
   category: field_testing
@@ -420,6 +451,7 @@ norms:
   item_id: 01F33FSKSTVI6WSBVINVH2KXCTVUDPWXHW
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2022476-3_2012-03%20(Standard%20Penetration%20Test).pdf
 - id: DIN EN ISO 22476-9
   description: Flügelscherversuch
   category: field_testing
@@ -433,6 +465,7 @@ norms:
   item_id: 01F33FSKS4Y4UFGLN4BFAJDRBUABEZZIRL
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2022476-9_2021-01%20(Fl%C3%BCgelscherversuche).pdf
 - id: DIN EN ISO 22282-4
   description: Pumpversuche
   category: field_testing
@@ -446,6 +479,7 @@ norms:
   item_id: 01F33FSKUC36PG4JXGHFA2OT2NEV3V4EO6
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2022282-4_2012-09%20%20(Pumpversuche).pdf
 - id: DIN 4023
   description: Geotechnische Erkundung - Zeichnerische Darstellung
   category: documentation
@@ -460,6 +494,7 @@ norms:
   item_id: 01F33FSKUWBTPW6ZC24RCIYUVJU7EO7FIP
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204023_2023-02%20(Darstellung%20von%20Bohrungen%20und%20sonstigen%20direkten%20Aufschl%C3%BCssen).pdf
 - id: DIN 1045
   description: Tragwerke aus Beton
   category: structural
@@ -474,6 +509,7 @@ norms:
   item_id: 01F33FSKX6KOAD7ABXARBLCLY7LRZFLCNY
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%201045-1_2023-08%20(Tragwerke%20aus%20Beton,%20Planung,%20Bemessung%20und%20Konstruktion).pdf
 - id: DIN EN 1992-1
   description: 'Eurocode 2: Bemessung von Stahlbetontragwerken'
   category: structural
@@ -487,6 +523,7 @@ norms:
   item_id: 01F33FSKRUKN3P6VWKLZFZTFWDN4YZW4UG
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201992-1_2011-01%20(Stahlbetontragwerke,%20Bemessungsregeln).pdf
 - id: DIN 1055
   description: Einwirkungen auf Tragwerke
   category: structural
@@ -500,6 +537,7 @@ norms:
   item_id: 01F33FSKX4I675YLSBBBB2ACYQXNCYEMFP
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20Technische%20Berichte/DIN%201055_TB_AWF041.pdf
 - id: DIN EN 1991
   description: 'Eurocode 1: Einwirkungen auf Tragwerke'
   category: structural
@@ -513,8 +551,9 @@ norms:
   item_id: 01F33FSKUVC5RQPBGQPFDIECPM6P26JWR3
   indexed: true
   indexed_date: '2026-02-04'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201991-1-1_ENTWURF_2023-04%20(Einwirkungen%20auf%20Tragwerke).pdf
 scan_summary:
-  scan_date: '2026-02-04T10:38:53.302350'
+  scan_date: '2026-02-04T16:58:11.390362'
   total_norms: 39
   found: 38
   withdrawn_only: 1
