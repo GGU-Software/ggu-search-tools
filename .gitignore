@@ -7,6 +7,10 @@ config.json
 # Crawl output
 output/
 
+# But track sharepoint-indexer extracted markdown (indexed documents)
+!sharepoint-indexer/output/
+sharepoint-indexer/output/*.pdf
+
 # Bun
 bun.lock
 
@@ -14,3 +18,16 @@ bun.lock
 .idea/
 .vscode/
 *.swp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.env
+*.log
+
+# SharePoint Indexer
+sharepoint-indexer/downloads/
+sharepoint-indexer/state.db
