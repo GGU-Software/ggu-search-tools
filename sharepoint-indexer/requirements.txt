@@ -1,0 +1,19 @@
+# SharePoint / Microsoft Graph API
+aiohttp>=3.9.0
+msal>=1.26.0
+
+# PDF Processing
+docling>=2.0.0
+
+# Pinecone
+pinecone-client>=3.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+pyyaml>=6.0.0
+
+# Development
+pytest>=7.0.0
+pytest-asyncio>=0.21.0

@@ -1,0 +1,21 @@
+# Environment
+.env
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded PDFs (large binaries)
+downloads/*.pdf
+downloads/*.PDF
+
+# Keep markdown files from downloads that were manually added
+!downloads/*.md
+
+# Temporary files
+*.log
+*.tmp
+
+# IDE
+.idea/
+.vscode/
+*.swp

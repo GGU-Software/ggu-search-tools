@@ -1,0 +1,37 @@
+# Indexing Filter Configuration
+# ==============================
+# Controls which documents get uploaded to Pinecone Assistant.
+#
+# Modes:
+#   - registry: Use norms-registry.yaml (recommended after --scan-norms)
+#   - whitelist: Only explicitly listed files (manual control)
+#   - patterns: Include/exclude by glob patterns
+#
+# The filter is applied AFTER validation (corrupted docs are always skipped).
+
+mode: registry  # "registry", "whitelist", or "patterns"
+
+# Whitelist Mode: Only these files will be uploaded
+# Use exact filenames (without path)
+whitelist:
+  - "DIN 4023_2006-02 (Geotechnische Erkundung und Untersuchung) zurueckgezogen.md"
+  - "DIN EN ISO 17892-1_2015-03 (Bestimmung des Wassergehalts) zurueckgezogen.md"
+  # Add more files as you verify they work well:
+  # - "Another Document.md"
+
+# Pattern Mode: Include/exclude by glob patterns
+# (Only used when mode: patterns)
+patterns:
+  include:
+    - "DIN*.md"
+    - "EC*.md"
+    - "ISO*.md"
+  exclude:
+    - "*zurueckgezogen*"  # Withdrawn standards (optional)
+    # - "EC 7 Band 1*"    # Already caught by validation
+
+# Notes:
+# - Validation (glyph encoding, empty content) is always applied first
+# - This filter controls which VALID documents get uploaded
+# - Use whitelist mode for careful, gradual rollout
+# - Switch to patterns mode once you're confident in the pipeline

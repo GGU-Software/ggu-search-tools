@@ -1,0 +1,526 @@
+settings:
+  prefer_latest: true
+  allow_withdrawn_fallback: true
+norms:
+- id: DIN 1054
+  description: Sicherheitsnachweise im Erd- und Grundbau
+  category: geotechnical
+  priority: high
+  status: found
+  sharepoint_file: DIN 1054_2021-04 (Sicherheitsnachweise in Erd- und Grundbau).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2021-04
+  is_withdrawn: false
+  item_id: 01F33FSKVB3Z3VSRPKOJDIRKHCJCVIIKK5
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4017
+  description: Grundbruchberechnungen
+  category: geotechnical
+  priority: high
+  status: found
+  sharepoint_file: DIN 4017_2026-02 (Grundbruchwiderstand Flachgründungen).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2026-02
+  is_withdrawn: false
+  item_id: 01F33FSKXQ2USLPCX6UFA3V4UR6IGNIZWI
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4019
+  description: Setzungsberechnungen
+  category: geotechnical
+  priority: high
+  status: found
+  sharepoint_file: DIN 4019_2015-05 (Setzungsberechnungen).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2015-05
+  is_withdrawn: false
+  item_id: 01F33FSKWDVHJ35K4TYZFKUK7TWKXQPAAK
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4084
+  description: Böschungs- und Geländebruchberechnungen
+  category: geotechnical
+  priority: high
+  status: found
+  sharepoint_file: DIN 4084_Beiblatt 1_2023-02 (Geländebruchberechnungen).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2023-02
+  is_withdrawn: false
+  item_id: 01F33FSKSACUALYNF4CZA3PUR6WLJCXY3G
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4085
+  description: Erddruckberechnungen
+  category: geotechnical
+  priority: high
+  status: found
+  sharepoint_file: DIN 4085_2017-08 (Berechnung des Erddrucks).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2017-08
+  is_withdrawn: false
+  item_id: 01F33FSKQFGFJUVVMGABBYMOMZ4QGM7QCO
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4093
+  description: Bemessung von verfestigten Bodenkörpern
+  category: geotechnical
+  priority: medium
+  status: found
+  sharepoint_file: DIN 4093_2015-11 (Bemes. von verfestigten Bodenkörpern).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2015-11
+  is_withdrawn: false
+  item_id: 01F33FSKXMXB54DHT2OBBYBFNXBYBU6OVU
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4094
+  description: Felduntersuchungen (Sondierungen)
+  category: field_testing
+  priority: medium
+  status: found
+  sharepoint_file: DIN 4094-2.pdf
+  validated: false
+  sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
+  version_date: null
+  is_withdrawn: false
+  item_id: 01F33FSKXSHENXBSFDOFCIRGHHEEI67OSG
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN 1997-1
+  description: Eurocode 7 (German National Annex)
+  category: eurocode
+  priority: high
+  status: found
+  sharepoint_file: DIN EN 1997-1_2014-03 (Entwurf, Berechnung und Bemessung in der
+    Geotechnik- Allg. Regeln).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  version_date: 2014-03
+  is_withdrawn: false
+  item_id: 01F33FSKQ7QYBB44TK7ZAKH3A2Z3NGT6AA
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18196
+  description: Bodenklassifikation für bautechnische Zwecke
+  category: classification
+  priority: high
+  status: found
+  sharepoint_file: DIN 18196_2023-02 (Bodenklassifikation für bautechnische Zwecke).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2023-02
+  is_withdrawn: false
+  item_id: 01F33FSKUDXBR7FIRGLFD36VS42TI2YM3S
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 14688-1
+  description: Benennung, Beschreibung und Klassifizierung von Boden - Teil 1
+  category: classification
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 14688-1_2020-11 (Benennung und Beschreibung von Boden).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2020-11
+  is_withdrawn: false
+  item_id: 01F33FSKWMEVXNUCQCPBFZY7PK2A34BMTJ
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 14688-2
+  description: Benennung, Beschreibung und Klassifizierung von Boden - Teil 2
+  category: classification
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 14688-2_2020-11 (Klassifizierung von Boden).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2020-11
+  is_withdrawn: false
+  item_id: 01F33FSKQXSURQZJ6R2JH2B7J5WSKNHACA
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 14689
+  description: Benennung, Beschreibung und Klassifizierung von Fels
+  category: classification
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 14689_2018-05 (Geotechn. Erkundung - Klassifizierung
+    von Fels).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2018-05
+  is_withdrawn: false
+  item_id: 01F33FSKVNWMJZWAGXTRAKHXQWD3MLMRMN
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18122
+  description: Zustandsgrenzen (Atterberg-Grenzen)
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN 18122-2_2020-11 (Best. der Schrumpfgrenze).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2020-11
+  is_withdrawn: false
+  item_id: 01F33FSKVKCFKBTKO7GVEYXZCYADBXIXDP
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18123
+  description: Korngrößenverteilung
+  category: lab_tests
+  priority: medium
+  status: withdrawn_only
+  sharepoint_file: DIN 18123_2011-04 (Korngrößenverteilung)_zurückgezogen.pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/Normen zurückgezogen
+  version_date: 2011-04
+  is_withdrawn: true
+  item_id: 01F33FSKVEN43DGCPSK5DJ5QBK554HTKA7
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18124
+  description: Korndichte
+  category: lab_tests
+  priority: low
+  status: found
+  sharepoint_file: DIN 18124_2019-02 (Korndichte).PDF
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2019-02
+  is_withdrawn: false
+  item_id: 01F33FSKQIK5URFVRV6ZDIWSTCSNXSXZVZ
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18125
+  description: Dichte des Bodens
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN 18125-2_2020-11 (Bestimmung der Dichte-Feldversuch).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2020-11
+  is_withdrawn: false
+  item_id: 01F33FSKW57PY4LXWWEVCKTF4VTAKZOLUA
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18127
+  description: Proctorversuch
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN 18127_2012-09  (Proctorversuch).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2012-09
+  is_withdrawn: false
+  item_id: 01F33FSKUHEPVRAXE4WNALB6AHCALAKPZX
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18128
+  description: Glühverlust
+  category: lab_tests
+  priority: low
+  status: found
+  sharepoint_file: DIN 18128.pdf
+  validated: false
+  sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
+  version_date: null
+  is_withdrawn: false
+  item_id: 01F33FSKW26VSLBX6FZVCYAB6OE2GVMLQQ
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18129
+  description: Kalkgehalt
+  category: lab_tests
+  priority: low
+  status: found
+  sharepoint_file: DIN 18129_2011-07 (Kalkgehaltsbestimmung).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2011-07
+  is_withdrawn: false
+  item_id: 01F33FSKT5ME5LNG6VIVFKL6DMONDGSPXG
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18130
+  description: Wasserdurchlässigkeit
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN 18130-2_2015-08 (Wasserdurchlässigkeitsbeiwert - Feldversuch).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2015-08
+  is_withdrawn: false
+  item_id: 01F33FSKQG2ZRCICFDPNCYZ6D4DPEL7ZMY
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18132
+  description: Wasseraufnahmevermögen
+  category: lab_tests
+  priority: low
+  status: found
+  sharepoint_file: DIN 18132_2012-04 (Wasseraufnahmevermögen).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2012-04
+  is_withdrawn: false
+  item_id: 01F33FSKUISURRBUNGENGIXZ3XEIPSCOMR
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18134
+  description: Plattendruckversuch
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN 18134_2012-04 (Plattendruckversuch).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2012-04
+  is_withdrawn: false
+  item_id: 01F33FSKQS7WUE7UNZPBGJUGK4BQK4BTOD
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18136
+  description: Einaxialer Druckversuch
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN 18136.pdf
+  validated: false
+  sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
+  version_date: null
+  is_withdrawn: false
+  item_id: 01F33FSKQN567BTKIKMRGYAQGQ3QAOUUPD
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18137
+  description: Scherfestigkeit
+  category: lab_tests
+  priority: high
+  status: found
+  sharepoint_file: DIN 18137-1_2010-07 (Bestimmung der Scherfestigkeit).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2010-07
+  is_withdrawn: false
+  item_id: 01F33FSKUYKNDWFJVX6ZGZDZUWBMIP7WRZ
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 18141
+  description: Baugrunderkundung durch Schürfe
+  category: field_testing
+  priority: low
+  status: found
+  sharepoint_file: DIN 18141-1_2014-05 (Best.der einaxialen Druckfestigkeit).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2014-05
+  is_withdrawn: false
+  item_id: 01F33FSKQ5FBLODMBGYVGY4WBTN7F7TLEE
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 17892-1
+  description: Bestimmung des Wassergehalts
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 17892-1_2022-08 (Bestimmung des Wassergehalts).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2022-08
+  is_withdrawn: false
+  item_id: 01F33FSKQHL22NLY32XFH3INXRUCVHUEGP
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 17892-2
+  description: Bestimmung der Dichte des Bodens
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 17892-2_2015-03 (Bestimung der Dichte des Bodens).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2015-03
+  is_withdrawn: false
+  item_id: 01F33FSKS4VLZIT6PD6JBKQKH5HSSGALJX
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 17892-4
+  description: Bestimmung der Korngrößenverteilung
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 17892-4_2017-04 (Korngrößenverteilung).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2017-04
+  is_withdrawn: false
+  item_id: 01F33FSKVJ7GLYRAH6DNCZ45GENGD53GEB
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 17892-12
+  description: Bestimmung der Zustandsgrenzen
+  category: lab_tests
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 17892-12_2022-08 (Bestimmung der Fließ- und Ausrollgrenze).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2022-08
+  is_withdrawn: false
+  item_id: 01F33FSKXWQR6SPK4AJBDYSQZR4EM5KMBA
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 22476-1
+  description: CPT - Drucksondierung
+  category: field_testing
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 22476-1_2013-10 (Drucksondierungen mit elektr.Messwertaufnehmern-Porenwasserdruck).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2013-10
+  is_withdrawn: false
+  item_id: 01F33FSKR3Q764GI2KCFC2ZSQ4GKCURTFO
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 22476-2
+  description: Rammsondierung
+  category: field_testing
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 22476-2_2012-03 (Geotechn. Erkundung - Rammsondierungen).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2012-03
+  is_withdrawn: false
+  item_id: 01F33FSKUG2CZURIGKEBHYGIWAP37TDP2M
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 22476-3
+  description: Standard Penetration Test (SPT)
+  category: field_testing
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN ISO 22476-3_2012-03 (Standard Penetration Test).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2012-03
+  is_withdrawn: false
+  item_id: 01F33FSKSTVI6WSBVINVH2KXCTVUDPWXHW
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 22476-9
+  description: Flügelscherversuch
+  category: field_testing
+  priority: low
+  status: found
+  sharepoint_file: DIN EN ISO 22476-9_2021-01 (Flügelscherversuche).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2021-01
+  is_withdrawn: false
+  item_id: 01F33FSKS4Y4UFGLN4BFAJDRBUABEZZIRL
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN ISO 22282-4
+  description: Pumpversuche
+  category: field_testing
+  priority: low
+  status: found
+  sharepoint_file: DIN EN ISO 22282-4_2012-09  (Pumpversuche).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  version_date: 2012-09
+  is_withdrawn: false
+  item_id: 01F33FSKUC36PG4JXGHFA2OT2NEV3V4EO6
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 4023
+  description: Geotechnische Erkundung - Zeichnerische Darstellung
+  category: documentation
+  priority: medium
+  status: found
+  sharepoint_file: DIN 4023_2023-02 (Darstellung von Bohrungen und sonstigen direkten
+    Aufschlüssen).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2023-02
+  is_withdrawn: false
+  item_id: 01F33FSKUWBTPW6ZC24RCIYUVJU7EO7FIP
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 1045
+  description: Tragwerke aus Beton
+  category: structural
+  priority: medium
+  status: found
+  sharepoint_file: DIN 1045-1_2023-08 (Tragwerke aus Beton, Planung, Bemessung und
+    Konstruktion).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  version_date: 2023-08
+  is_withdrawn: false
+  item_id: 01F33FSKX6KOAD7ABXARBLCLY7LRZFLCNY
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN 1992-1
+  description: 'Eurocode 2: Bemessung von Stahlbetontragwerken'
+  category: structural
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN 1992-1_2011-01 (Stahlbetontragwerke, Bemessungsregeln).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  version_date: 2011-01
+  is_withdrawn: false
+  item_id: 01F33FSKRUKN3P6VWKLZFZTFWDN4YZW4UG
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN 1055
+  description: Einwirkungen auf Tragwerke
+  category: structural
+  priority: low
+  status: found
+  sharepoint_file: DIN 1055_TB_AWF041.pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN Technische Berichte
+  version_date: null
+  is_withdrawn: false
+  item_id: 01F33FSKX4I675YLSBBBB2ACYQXNCYEMFP
+  indexed: true
+  indexed_date: '2026-02-04'
+- id: DIN EN 1991
+  description: 'Eurocode 1: Einwirkungen auf Tragwerke'
+  category: structural
+  priority: low
+  status: found
+  sharepoint_file: DIN EN 1991-1-1_ENTWURF_2023-04 (Einwirkungen auf Tragwerke).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  version_date: 2023-04
+  is_withdrawn: false
+  item_id: 01F33FSKUVC5RQPBGQPFDIECPM6P26JWR3
+  indexed: true
+  indexed_date: '2026-02-04'
+scan_summary:
+  scan_date: '2026-02-04T10:38:53.302350'
+  total_norms: 39
+  found: 38
+  withdrawn_only: 1
+  not_found: 0
+index_summary:
+  last_indexed: '2026-02-04'
+  pinecone_assistant: ggu-techdoc-search
+  total_indexed: 39
+  total_norms: 39
