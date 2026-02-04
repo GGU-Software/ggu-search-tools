@@ -119,6 +119,7 @@ def validate_markdown(output_dir: Path) -> list[dict]:
 
 def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
     """Prepare documents for upload (dry run)."""
+    import yaml
     from src.config import get_settings
     from src.indexing import IndexingFilter
 
@@ -161,6 +162,22 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
         print("Edit config/indexing.yaml to add documents to the whitelist.")
         return []
 
+    # Load registry to get web_url for each document
+    registry_path = Path(__file__).parent.parent / "config" / "norms-registry.yaml"
+    url_lookup = {}
+    if registry_path.exists():
+        with open(registry_path, 'r', encoding='utf-8') as f:
+            registry = yaml.safe_load(f)
+        for norm in registry.get('norms', []):
+            # Map PDF filename to web_url
+            pdf_file = norm.get('sharepoint_file')
+            web_url = norm.get('web_url')
+            if pdf_file and web_url:
+                # Also map the markdown filename
+                md_file = pdf_file[:-4] + '.md' if pdf_file.lower().endswith('.pdf') else pdf_file
+                url_lookup[md_file] = web_url
+                url_lookup[pdf_file] = web_url
+
     print(f"\n{'=' * 60}")
     print("UPLOAD PREPARATION")
     print('=' * 60)
@@ -172,6 +189,9 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
         md_path = Path(doc["path"])
         content = md_path.read_text(encoding='utf-8')
 
+        # Get SharePoint URL from registry, fallback to placeholder
+        source_url = url_lookup.get(doc["filename"], f"sharepoint://GGU/Bibliothek/{md_path.stem}.pdf")
+
         # Create document entry
         documents.append({
             "filename": doc["filename"],
@@ -179,7 +199,7 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
             "metadata": {
                 "title": md_path.stem,
                 "source": "sharepoint",
-                "source_url": f"sharepoint://GGU/Bibliothek/{md_path.stem}.pdf",
+                "source_url": source_url,
             },
             "word_count": doc["word_count"],
         })
@@ -190,7 +210,9 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
     print(f"  Total words: {total_words:,}")
     print(f"\nDocuments:")
     for doc in documents:
-        print(f"  - {doc['filename']} ({doc['word_count']:,} words)")
+        has_url = not doc['metadata']['source_url'].startswith('sharepoint://')
+        url_status = "[URL]" if has_url else "[NO URL]"
+        print(f"  {url_status} {doc['filename']} ({doc['word_count']:,} words)")
 
     # Estimate time
     settings = get_settings()
@@ -294,7 +316,7 @@ async def scan_norms(config_dir: Path) -> None:
 
     async for doc in fetch_documents(client, file_extensions=['.pdf']):
         doc_count += 1
-        match = matcher.match_document(doc.filename, doc.parent_path, doc.id)
+        match = matcher.match_document(doc.filename, doc.parent_path, doc.id, doc.web_url)
         if match:
             matches.append(match)
             print(f"  [MATCH] {doc.filename}")

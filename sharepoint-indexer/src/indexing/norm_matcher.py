@@ -37,6 +37,7 @@ class SharePointMatch:
     filename: str
     path: str
     item_id: str  # Graph API item ID for downloading
+    web_url: str  # SharePoint web URL for direct access
     norm_id: str
     norm_key: str  # Normalized key that matched in registry
     version_date: Optional[str]
@@ -239,7 +240,7 @@ class NormMatcher:
 
         return None
 
-    def match_document(self, filename: str, path: str, item_id: str = "") -> Optional[SharePointMatch]:
+    def match_document(self, filename: str, path: str, item_id: str = "", web_url: str = "") -> Optional[SharePointMatch]:
         """
         Try to match a document to a norm in the registry.
 
@@ -247,6 +248,7 @@ class NormMatcher:
             filename: Document filename
             path: Full SharePoint path
             item_id: Graph API item ID for downloading
+            web_url: SharePoint web URL for direct access
 
         Returns:
             SharePointMatch if document matches a norm, None otherwise
@@ -268,6 +270,7 @@ class NormMatcher:
             filename=filename,
             path=path,
             item_id=item_id,
+            web_url=web_url,
             norm_id=full_id,
             norm_key=registry_key,
             version_date=self._extract_version_date(filename),
@@ -355,6 +358,7 @@ class NormMatcher:
                 norm_data['sharepoint_file'] = match.filename
                 norm_data['sharepoint_path'] = match.path
                 norm_data['item_id'] = match.item_id
+                norm_data['web_url'] = match.web_url
                 norm_data['version_date'] = match.version_date
                 norm_data['is_withdrawn'] = match.is_withdrawn
             else:
@@ -362,6 +366,7 @@ class NormMatcher:
                 norm_data['sharepoint_file'] = None
                 norm_data['sharepoint_path'] = None
                 norm_data['item_id'] = None
+                norm_data['web_url'] = None
                 norm_data['version_date'] = None
                 norm_data['is_withdrawn'] = False
 
