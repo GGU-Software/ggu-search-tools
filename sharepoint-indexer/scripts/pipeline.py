@@ -192,10 +192,21 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
         # Get SharePoint URL from registry, fallback to placeholder
         source_url = url_lookup.get(doc["filename"], f"sharepoint://GGU/Bibliothek/{md_path.stem}.pdf")
 
+        # Embed source URL in content header (so it appears in search results)
+        # Use a visible markdown block that will be included in indexed chunks
+        has_real_url = not source_url.startswith('sharepoint://')
+        if has_real_url:
+            # Extract norm name from filename for better context
+            norm_name = md_path.stem.split('_')[0].replace('-', ' ').strip()
+            url_header = f"---\n**Dokument:** {norm_name}\n**SharePoint:** {source_url}\n---\n\n"
+            content_with_url = url_header + content
+        else:
+            content_with_url = content
+
         # Create document entry
         documents.append({
             "filename": doc["filename"],
-            "content": content,
+            "content": content_with_url,
             "metadata": {
                 "title": md_path.stem,
                 "source": "sharepoint",
@@ -211,7 +222,7 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
     print(f"\nDocuments:")
     for doc in documents:
         has_url = not doc['metadata']['source_url'].startswith('sharepoint://')
-        url_status = "[URL]" if has_url else "[NO URL]"
+        url_status = "[URL embedded]" if has_url else "[NO URL]"
         print(f"  {url_status} {doc['filename']} ({doc['word_count']:,} words)")
 
     # Estimate time
