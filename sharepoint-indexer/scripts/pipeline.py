@@ -16,11 +16,49 @@ Usage:
 """
 
 import sys
+import re
 import argparse
 from pathlib import Path
 from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+
+def embed_url_in_sections(content: str, source_url: str, norm_name: str) -> str:
+    """
+    Embed source URL after each major heading in the document.
+
+    This ensures the URL appears in more Pinecone chunks, not just the first one.
+    URLs are injected after ## and ### headings as a compact reference block.
+
+    Args:
+        content: Original markdown content
+        source_url: SharePoint URL to embed
+        norm_name: Human-readable norm name for context
+
+    Returns:
+        Content with URLs embedded after each section heading
+    """
+    # Compact reference format (single line to minimize document bloat)
+    # Using text marker instead of emoji for better encoding compatibility
+    url_ref = f"\n> **Quelle:** {norm_name} - [Original in SharePoint]({source_url})\n"
+
+    # Pattern to match ## and ### headings (but not #### or deeper)
+    # Captures the full heading line including any trailing whitespace
+    heading_pattern = re.compile(r'^(#{2,3}\s+[^\n]+)(\n)', re.MULTILINE)
+
+    # Insert URL reference after each heading
+    def insert_ref(match):
+        heading = match.group(1)
+        newline = match.group(2)
+        return heading + newline + url_ref
+
+    content_with_urls = heading_pattern.sub(insert_ref, content)
+
+    # Also add header at document start for searches that match the beginning
+    doc_header = f"---\n**Dokument:** {norm_name}\n**SharePoint:** {source_url}\n---\n\n"
+
+    return doc_header + content_with_urls
 
 # Lazy imports to avoid loading heavy dependencies unnecessarily
 # from src.config import get_settings
@@ -192,14 +230,13 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
         # Get SharePoint URL from registry, fallback to placeholder
         source_url = url_lookup.get(doc["filename"], f"sharepoint://GGU/Bibliothek/{md_path.stem}.pdf")
 
-        # Embed source URL in content header (so it appears in search results)
-        # Use a visible markdown block that will be included in indexed chunks
+        # Embed source URL throughout the document (so it appears in more Pinecone chunks)
+        # URLs are injected after each ## and ### heading, plus a header at the top
         has_real_url = not source_url.startswith('sharepoint://')
         if has_real_url:
             # Extract norm name from filename for better context
             norm_name = md_path.stem.split('_')[0].replace('-', ' ').strip()
-            url_header = f"---\n**Dokument:** {norm_name}\n**SharePoint:** {source_url}\n---\n\n"
-            content_with_url = url_header + content
+            content_with_url = embed_url_in_sections(content, source_url, norm_name)
         else:
             content_with_url = content
 
