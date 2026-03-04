@@ -1,0 +1,33 @@
+# Whisper-Fehlerkorrektur für GGU-Webinare
+# Format: falsch<TAB>richtig (eine Korrektur pro Zeile)
+# Längere Patterns werden automatisch zuerst angewendet
+2 Deordnungen	Theorie 2. Ordnung
+Klickstabescheinung	Knickstaberscheinung
+Talsicherheitskonzept	Teilsicherheitskonzept
+Vertechalkomponente	Vertikalkomponente
+Höhenbettungsmodul	erhöhtes Bettungsmodul
+Substraturschleite	Literaturstelle
+Stromburhöhre	Strömungsberechnung
+Wettungspressung	Bettungspressung
+Startwerksystem	Stabwerkssystem
+Ausdruckszustand	Aushubzustand
+Ausmachungsgrad	Ausnutzungsgrad
+Talsicherheiten	Teilsicherheiten
+Trägerpulwand	Trägerbohlwand
+Performungsbild	Verformungsbild
+Wettungsmodul	Bettungsmodul
+Baugubenseite	Baugrubenseite
+Erddruckerstand	Erdwiderstand
+Glendesprung	Geländesprung
+Gigi Ubiten	GGU-Retain
+Baugumm-Tiefe	Baugruben-Tiefe
+Baugunsohle	Baugrubensohle
+Auslungsruf	Ausnutzungsgrad
+Kilogentwo	Kilonewton pro
+Versierung	Version
+Abmündung	Abminderung
+Klickstab	Knickstab
+Sprungwand	Spundwand
+Startwerk	Stabwerk
+Moosung	Maus
+Bärm	Bermen

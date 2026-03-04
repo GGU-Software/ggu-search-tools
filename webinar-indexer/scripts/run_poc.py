@@ -21,12 +21,13 @@ from dotenv import load_dotenv
 load_dotenv(PROJECT_ROOT / ".env")
 
 from src.transcribe import transcribe
+from src.corrections import load_corrections, apply_corrections
 from src.structure import structure
 
 
 def slugify(name: str) -> str:
     """Convert a filename to a URL-friendly slug."""
-    return name.lower().replace(" ", "-").removesuffix(".mp4")
+    return name.lower().replace(" ", "-")
 
 
 def main():
@@ -44,13 +45,16 @@ def main():
     raw_dir.mkdir(parents=True, exist_ok=True)
     structured_dir.mkdir(parents=True, exist_ok=True)
 
-    # Step 1: Transcribe
+    # Step 1: Transcribe + correct
     raw_path = raw_dir / f"{slug}.txt"
     if raw_path.exists():
         print(f"Raw transcript already exists: {raw_path}")
         transcript = raw_path.read_text(encoding="utf-8")
     else:
         transcript = transcribe(video_path)
+        corrections = load_corrections()
+        print("Applying corrections...")
+        transcript = apply_corrections(transcript, corrections)
         raw_path.write_text(transcript, encoding="utf-8")
         print(f"Raw transcript saved: {raw_path}")
 

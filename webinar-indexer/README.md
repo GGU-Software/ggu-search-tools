@@ -1,13 +1,12 @@
-# Webinar-Indexer (POC)
+# Webinar-Indexer
 
 Extrahiert strukturiertes Wissen aus GGU-Webinar-Aufzeichnungen.
 
-**Status**: POC — ein einzelnes Video, lokale Verarbeitung.
-
 ## Ablauf
 
-1. **Whisper** transkribiert das Video lokal (Modell: `medium`, Sprache: `de`)
-2. **Claude** strukturiert das Transkript in ein Markdown-Dokument
+1. **Whisper** transkribiert Videos lokal (Modell: `medium`, Sprache: `de`, GPU wenn verfügbar)
+2. **Fehlerkorrektur** via `corrections.tsv` — bekannte Whisper-Fehler automatisch beheben
+3. **Claude** strukturiert jedes Transkript in ein Markdown-Dokument
 
 ## Voraussetzungen
 
@@ -23,18 +22,41 @@ cp .env.example .env        # API-Key eintragen
 pip install -r requirements.txt
 ```
 
-## Nutzung
+## Batch-Verarbeitung
+
+Videos in `videos/` ablegen, dann:
+
+```bash
+# Schritt 1: Alle Videos transkribieren (bereits transkribierte werden übersprungen)
+python scripts/batch_transcribe.py
+
+# Schritt 2: Alle Transkripte strukturieren (bereits strukturierte werden übersprungen)
+python scripts/batch_structure.py
+```
+
+### Einzelnes Video (POC)
 
 ```bash
 python scripts/run_poc.py videos/Berechnung\ und\ Bemessung\ von\ Verbauwänden.mp4
 ```
 
-Output:
-- `transcripts/raw/*.txt` — Whisper-Rohtranskript
+### Output
+
+- `transcripts/raw/*.txt` — korrigiertes Whisper-Transkript
 - `transcripts/structured/*.md` — Claude-strukturiertes Markdown
 
-## Bewertungskriterien
+## Fehlerkorrektur (`corrections.tsv`)
 
-- Transkriptqualität (Fachbegriffe korrekt?)
-- Strukturierung (alle Sections sinnvoll gefüllt?)
-- Menüpfade und Workflows erkennbar?
+Whisper produziert bei GGU-Fachbegriffen systematische Fehler. Die Datei `corrections.tsv` korrigiert diese automatisch:
+
+```
+# Format: falsch<TAB>richtig
+Gigi Ubiten	GGU-Retain
+Talsicherheitskonzept	Teilsicherheitskonzept
+```
+
+Neue Korrekturen einfach als Zeile ergänzen. Längere Patterns werden automatisch zuerst angewendet.
+
+## GPU-Unterstützung
+
+Whisper nutzt automatisch eine CUDA-fähige GPU wenn verfügbar. Device und fp16-Status werden beim Start geloggt. Ohne GPU: CPU-Fallback (langsamer, aber funktional).
