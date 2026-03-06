@@ -31,3 +31,5 @@ venv/
 # SharePoint Indexer
 sharepoint-indexer/downloads/
 sharepoint-indexer/state.db
+
+.claude/settings.local.json
