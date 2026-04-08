@@ -4,9 +4,9 @@
 
 ## Ausgangslage (DEV-3101)
 
-Die GGU-Entwicklung hat ein strukturelles Wissensproblem: Fachwissen ueber Programmablaeufe, Workflows und Dialoge liegt bei den Fachkollegen, die kaum Zeit fuer Rueckfragen haben. Die Dokumentation in den Repos ist lueckenhaft, der Legacy-Code schwer lesbar. Das bremst sowohl manuelle Entwicklung als auch AI-gestuetzte Automatisierung — Claude Code fehlt Kontext zu Workflows, Dialognavigation und fachlichen Zusammenhaengen.
+Die GGU-Entwicklung hat ein strukturelles Wissensproblem: Fachwissen über Programmabläufe, Workflows und Dialoge liegt bei den Fachkollegen, die kaum Zeit für Rückfragen haben. Die Dokumentation in den Repos ist lückenhaft, der Legacy-Code schwer lesbar. Das bremst sowohl manuelle Entwicklung als auch AI-gestützte Automatisierung — Claude Code fehlt Kontext zu Workflows, Dialognavigation und fachlichen Zusammenhängen.
 
-GGU-Webinare (ca. 10-50 Aufzeichnungen) enthalten genau dieses fehlende Fachwissen. Experten erklaeren darin Programmfunktionen, Workflows und Dialoge.
+GGU-Webinare (ca. 10-50 Aufzeichnungen) enthalten genau dieses fehlende Fachwissen. Experten erklären darin Programmfunktionen, Workflows und Dialoge.
 
 ## Was umgesetzt wurde
 
@@ -21,11 +21,11 @@ MP4 Video → Whisper (GPU/CPU) → Fehlerkorrektur → Claude-Strukturierung �
 - **Whisper-Transkription** mit automatischer GPU-Erkennung und CPU-Fallback
 - **34 domänenspezifische Korrekturen** via `corrections.tsv` (z.B. "Gigi Ubiten" → "GGU-Retain", "Talsicherheitskonzept" → "Teilsicherheitskonzept")
 - **Claude-Strukturierung** (Sonnet 4.6) mit standardisiertem Prompt: erzeugt Zusammenfassung, Dialog-Navigation, Kernfunktionen, Fachbegriffe, FAQ
-- **Batch-Faehig**: `batch_transcribe.py` und `batch_structure.py` verarbeiten alle Videos, ueberspringen bereits vorhandene
+- **Batch-fähig**: `batch_transcribe.py` und `batch_structure.py` verarbeiten alle Videos, überspringen bereits vorhandene
 
 ### 2. Verarbeitete Webinare
 
-6 Webinare vollstaendig verarbeitet (Stand 2026-03-04):
+6 Webinare vollständig verarbeitet (Stand 2026-03-04):
 
 | Webinar | App | Rohtranskript | Strukturiert |
 |---------|-----|---------------|--------------|
@@ -38,7 +38,7 @@ MP4 Video → Whisper (GPU/CPU) → Fehlerkorrektur → Claude-Strukturierung �
 
 Gesamt: ~204K Rohtext, ~64K strukturierte Markdowns.
 
-### 3. Knowledge-Skills fuer Claude Code (DEV-3145)
+### 3. Knowledge-Skills für Claude Code (DEV-3145)
 
 Drei app-spezifische Skills in `infra/ggu-dev-tools/claude-code/skills/`:
 
@@ -48,13 +48,13 @@ Drei app-spezifische Skills in `infra/ggu-dev-tools/claude-code/skills/`:
 | `@ggu-slab-knowledge` | 1 Webinar | 115 Zeilen / 7.5K | Bettungsmodul, Steifemodulverfahren, FE-Netz, Priebe |
 | `@ggu-stability-knowledge` | 2 Webinare | 183 Zeilen / 13K | Gleitkreis, Konsolidierung, Porenwasserdruck, GGU-2D SS-Flow |
 
-Die Skills laden automatisch, wenn ein Entwickler im jeweiligen App-Repo arbeitet und liefern Kontext zu Berechnungsworkflows, Menuepfaden und Fachbegriffen.
+Die Skills laden automatisch, wenn ein Entwickler im jeweiligen App-Repo arbeitet und liefern Kontext zu Berechnungsworkflows, Menüpfaden und Fachbegriffen.
 
 ### 4. Handbuch-Gap-Analyse (DEV-3146)
 
 Systematischer Cross-Reference: Webinar-Wissen vs. Online-Handbuch (via ggu-public-docs MCP Server mit 25.000+ Seiten). Ergebnis:
 
-| App | Gaps gesamt | FEHLT | UNVOLLSTAENDIG | VERBESSERBAR |
+| App | Gaps gesamt | FEHLT | UNVOLLSTÄNDIG | VERBESSERBAR |
 |-----|-------------|-------|----------------|--------------|
 | RETAIN | 16 | 7 | 5 | 4 |
 | SLAB | 12 | 2 | 4 | 4 |
@@ -63,7 +63,7 @@ Systematischer Cross-Reference: Webinar-Wissen vs. Online-Handbuch (via ggu-publ
 
 Gap Reports liegen in den jeweiligen App-Repos unter `docs/usermanual-updates/`.
 
-## Ticket-Uebersicht
+## Ticket-Übersicht
 
 ```
 DEV-3101  Done     Idee: Wissen aus Webinaren extrahieren
@@ -80,28 +80,28 @@ DEV-3101  Done     Idee: Wissen aus Webinaren extrahieren
 
 ### Mehr Webinare verarbeiten
 
-Bisher 6 von geschaetzt 10-50 Webinaren verarbeitet, nur 3 Apps abgedeckt. Weitere Webinare wuerden Knowledge-Skills fuer CONNECT, FOOTING, CANTILEVER, STRATIG etc. ermoeglichen. Die Pipeline steht — der Aufwand pro Webinar ist minimal (Video in `videos/` legen, Batch-Skripte ausfuehren, Ergebnis pruefen).
+Bisher 6 von geschätzt 10-50 Webinaren verarbeitet, nur 3 Apps abgedeckt. Weitere Webinare würden Knowledge-Skills für CONNECT, FOOTING, CANTILEVER, STRATIG etc. ermöglichen. Die Pipeline steht — der Aufwand pro Webinar ist minimal (Video in `videos/` legen, Batch-Skripte ausführen, Ergebnis prüfen).
 
-### Autopilot-Skills mit Dialog-Navigation fuettern (DEV-3502)
+### Autopilot-Skills mit Dialog-Navigation füttern (DEV-3502)
 
-Die Skills `/autopilot-sd`, `/analyse-sd` und `/reproduce-behaviour` koennten Dialog-Navigationsdaten aus den Knowledge-Skills nutzen. Besonders `/reproduce-behaviour` (AutoIt-basierte GUI-Automatisierung) profitiert von konkreten Menuepfaden und Dialogstrukturen.
+Die Skills `/autopilot-sd`, `/analyse-sd` und `/reproduce-behaviour` könnten Dialog-Navigationsdaten aus den Knowledge-Skills nutzen. Besonders `/reproduce-behaviour` (AutoIt-basierte GUI-Automatisierung) profitiert von konkreten Menüpfaden und Dialogstrukturen.
 
 ### 46 Handbuch-Gaps umsetzen (DEV-3250/3251/3252)
 
-Die Gap-Analyse hat 46 konkrete Verbesserungsvorschlaege fuer das Online-Handbuch identifiziert — 15 davon betreffen komplett fehlende Inhalte (z.B. Step-by-Step-Workflows fuer Bauphasen, Deich-Standsicherheit, Bettungsmodulverfahren). Das Material aus den Webinaren liefert die Vorlage.
+Die Gap-Analyse hat 46 konkrete Verbesserungsvorschläge für das Online-Handbuch identifiziert — 15 davon betreffen komplett fehlende Inhalte (z.B. Step-by-Step-Workflows für Bauphasen, Deich-Standsicherheit, Bettungsmodulverfahren). Das Material aus den Webinaren liefert die Vorlage.
 
 ### Support-FAQs
 
-Die strukturierten Markdowns enthalten bereits FAQ-Abschnitte. Diese koennten als Grundlage fuer Support-Dokumentation dienen.
+Die strukturierten Markdowns enthalten bereits FAQ-Abschnitte. Diese könnten als Grundlage für Support-Dokumentation dienen.
 
 ### Pinecone-Integration
 
-Strukturierte Webinar-Dokumente koennten in den `ggu-public-docs` Pinecone-Index hochgeladen werden, um die MCP-Server-Antworten mit Workflow-Wissen anzureichern.
+Strukturierte Webinar-Dokumente könnten in den `ggu-public-docs` Pinecone-Index hochgeladen werden, um die MCP-Server-Antworten mit Workflow-Wissen anzureichern.
 
 ## Tech-Stack
 
 - **Transkription**: OpenAI Whisper (medium model, Deutsch, GPU-beschleunigt)
-- **Strukturierung**: Claude API (Sonnet 4.6, 8K Token-Budget)
-- **Fehlerkorrektur**: Python-Regex mit Wortgrenzen-Constraints
+- **Strukturierung**: Claude API (Sonnet 4.6, 8K-Token-Budget)
+- **Fehlerkorrektur**: Python-Regex mit Wortgrenz-Constraints
 - **Skills**: Claude Code Markdown-basiertes Skill-System
 - **Suche**: Pinecone MCP Assistants (ggu-public-docs, ggu-techdoc-search)
