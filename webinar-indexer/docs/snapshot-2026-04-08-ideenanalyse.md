@@ -82,6 +82,8 @@ DEV-3101  Done     Idee: Wissen aus Webinaren extrahieren
 
 Bisher 6 von geschätzt 10-50 Webinaren verarbeitet, nur 3 Apps abgedeckt. Weitere Webinare würden Knowledge-Skills für CONNECT, FOOTING, CANTILEVER, STRATIG etc. ermöglichen. Die Pipeline steht — der Aufwand pro Webinar ist minimal (Video in `videos/` legen, Batch-Skripte ausführen, Ergebnis prüfen).
 
+**Einschränkung**: Die bisherigen Webinare sind älteren Datums — das extrahierte Wissen kann teilweise veraltet sein (geänderte Dialoge, neue Funktionen, aktualisierte Normen). Die Pipeline eignet sich aber genauso für neu aufgezeichnete Schulungen. Gezielt neue Schulungen aufzuzeichnen und zu verarbeiten wäre ein Weg, aktuelles Fachwissen systematisch zu erfassen.
+
 ### Autopilot-Skills mit Dialog-Navigation füttern (DEV-3502)
 
 Die Skills `/autopilot-sd`, `/analyse-sd` und `/reproduce-behaviour` könnten Dialog-Navigationsdaten aus den Knowledge-Skills nutzen. Besonders `/reproduce-behaviour` (AutoIt-basierte GUI-Automatisierung) profitiert von konkreten Menüpfaden und Dialogstrukturen.
