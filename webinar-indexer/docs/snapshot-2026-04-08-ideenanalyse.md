@@ -8,6 +8,10 @@ Die GGU-Entwicklung hat ein strukturelles Wissensproblem: Fachwissen über Progr
 
 GGU-Webinare (ca. 10-50 Aufzeichnungen) enthalten genau dieses fehlende Fachwissen. Experten erklären darin Programmfunktionen, Workflows und Dialoge.
 
+## Aufwand
+
+Laut Commit-Historie wurde die gesamte Umsetzung in ~3 Tagen realisiert (4.-6. März 2026): POC an Tag 1, Batch-Pipeline + 6 Webinare an Tag 2, Knowledge-Skills + Gap-Analyse an Tag 3. Insgesamt 7 Commits über 4 Repos.
+
 ## Was umgesetzt wurde
 
 ### 1. Transkriptions-Pipeline (DEV-3144)
@@ -48,7 +52,7 @@ Drei app-spezifische Skills in `infra/ggu-dev-tools/claude-code/skills/`:
 | `@ggu-slab-knowledge` | 1 Webinar | 115 Zeilen / 7.5K | Bettungsmodul, Steifemodulverfahren, FE-Netz, Priebe |
 | `@ggu-stability-knowledge` | 2 Webinare | 183 Zeilen / 13K | Gleitkreis, Konsolidierung, Porenwasserdruck, GGU-2D SS-Flow |
 
-Die Skills laden automatisch, wenn ein Entwickler im jeweiligen App-Repo arbeitet und liefern Kontext zu Berechnungsworkflows, Menüpfaden und Fachbegriffen.
+Die Skills laden automatisch, wenn ein Entwickler im jeweiligen App-Repo arbeitet und liefern Kontext zu Berechnungsworkflows, Menüpfaden und Fachbegriffen. Sie werden bereits produktiv genutzt — z.B. bei Bug-Analysen in RETAIN und STABILITY fließt das Webinar-Wissen automatisch in die AI-gestützte Entwicklung ein.
 
 ### 4. Handbuch-Gap-Analyse (DEV-3146)
 
@@ -99,6 +103,10 @@ Die strukturierten Markdowns enthalten bereits FAQ-Abschnitte. Diese könnten al
 ### Pinecone-Integration
 
 Strukturierte Webinar-Dokumente könnten in den `ggu-public-docs` Pinecone-Index hochgeladen werden, um die MCP-Server-Antworten mit Workflow-Wissen anzureichern.
+
+## Kernidee
+
+AI extrahiert Expertenwissen aus Schulungsvideos → macht AI besser darin, Entwicklern zu helfen → Entwickler werden produktiver und brauchen weniger Rückfragen an Fachkollegen. Ein sich selbst verstärkender Kreislauf: Jedes verarbeitete Webinar verbessert die AI-gestützte Entwicklung für alle Beteiligten.
 
 ## Tech-Stack
 
