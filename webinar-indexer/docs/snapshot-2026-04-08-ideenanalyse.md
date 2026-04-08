@@ -102,7 +102,7 @@ Strukturierte Webinar-Dokumente könnten in den `ggu-public-docs` Pinecone-Index
 
 ## Tech-Stack
 
-- **Transkription**: OpenAI Whisper (medium model, Deutsch, GPU-beschleunigt)
+- **Transkription**: OpenAI Whisper — AI-basierte Spracherkennung (medium model, Deutsch, GPU-beschleunigt)
 - **Strukturierung**: Claude API (Sonnet 4.6, 8K-Token-Budget)
 - **Fehlerkorrektur**: Python-Regex mit Wortgrenz-Constraints
 - **Skills**: Claude Code Markdown-basiertes Skill-System
