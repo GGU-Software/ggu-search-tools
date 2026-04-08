@@ -27,16 +27,16 @@ MP4 Video → Whisper (GPU/CPU) → Fehlerkorrektur → Claude-Strukturierung �
 
 6 Webinare vollständig verarbeitet (Stand 2026-03-04):
 
-| Webinar | App | Rohtranskript | Strukturiert |
-|---------|-----|---------------|--------------|
-| Bauphasen in GGU-Retain | RETAIN | 42K | 7.4K |
-| Berechnung und Bemessung von Verbauwänden | RETAIN | 28K | 13K |
-| Injektionssohlen mit GGU-Retain | RETAIN | 15K | 7.7K |
-| Einstieg in GGU-SLAB | SLAB | 38K | 8.0K |
-| GGU-STABILITY | STABILITY | 24K | 6.4K |
-| Konsolidierungsschichten in GGU-STABILITY | STABILITY | 46K | 8.7K |
+| Webinar | App | Rohtranskript (Wörter) | Strukturiert (Zeilen / Wörter) |
+|---------|-----|------------------------|-------------------------------|
+| Bauphasen in GGU-Retain | RETAIN | 6.684 | 98 / 963 |
+| Berechnung und Bemessung von Verbauwänden | RETAIN | 4.393 | 131 / 1.565 |
+| Injektionssohlen mit GGU-Retain | RETAIN | 2.318 | 102 / 934 |
+| Einstieg in GGU-SLAB | SLAB | 5.853 | 115 / 942 |
+| GGU-STABILITY | STABILITY | 3.303 | 94 / 686 |
+| Konsolidierungsschichten in GGU-STABILITY | STABILITY | 6.943 | 100 / 997 |
 
-Gesamt: ~204K Rohtext, ~64K strukturierte Markdowns.
+Gesamt: ~29.500 Wörter Rohtranskript, ~6.100 Wörter strukturierte Markdowns.
 
 ### 3. Knowledge-Skills für Claude Code (DEV-3145)
 
