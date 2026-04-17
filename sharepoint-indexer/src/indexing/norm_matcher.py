@@ -29,6 +29,7 @@ class NormEntry:
     validated: bool = False
     is_withdrawn: bool = False
     version_date: Optional[str] = None
+    search_terms: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -59,15 +60,17 @@ class NormMatcher:
     """Match SharePoint documents to norm registry."""
 
     # Pattern to extract norm ID from filename
-    # Matches: DIN 4017, DIN EN ISO 17892-1, EN 1997-1, ISO 14688-1
+    # Matches: DIN 4017, DIN EN ISO 17892-1, EN 1997-1, ISO 14688-1,
+    #          VDI 4640, OENORM B 4417, OENORM EN 1997-1, ASTM D2487
     # Requires:
-    #   - Prefix (DIN, EN, ISO, or combinations)
+    #   - Prefix (DIN, EN, ISO, VDI, OENORM, ASTM, or combinations)
+    #   - Optional letter-number prefix for OENORM (B, EN) or ASTM (D, E)
     #   - Main number (at least 3 digits to avoid false matches)
     #   - Optional part numbers (-1, -2, etc.)
     #   - Followed by non-digit (to prevent 22476-1 matching 22476-14)
     NORM_PATTERN = re.compile(
-        r'(DIN\s+EN\s+ISO|DIN\s+EN|DIN|EN\s+ISO|EN|ISO)\s+'
-        r'(\d{3,5})(?:-(\d{1,3}))?(?:-(\d{1,2}))?'
+        r'(DIN\s+EN\s+ISO|DIN\s+EN|DIN|EN\s+ISO|EN|ISO|VDI|OENORM\s+EN|OENORM\s+B|OENORM|ASTM)\s+'
+        r'([A-Z]?\s*\d{3,5})(?:-(\d{1,3}))?(?:-(\d{1,2}))?'
         r'(?=[_\s\.\(\)]|$)',  # Must be followed by separator, not another digit
         re.IGNORECASE
     )
@@ -114,6 +117,7 @@ class NormMatcher:
                 status=norm_data.get('status', 'pending'),
                 sharepoint_file=norm_data.get('sharepoint_file'),
                 validated=norm_data.get('validated', False),
+                search_terms=norm_data.get('search_terms', []),
             )
             # Normalize ID for matching
             norm_key = self._normalize_norm_id(norm.id)
@@ -240,6 +244,29 @@ class NormMatcher:
 
         return None
 
+    def _match_by_search_terms(self, filename: str) -> Optional[tuple[str, bool]]:
+        """
+        Try to match a filename using search_terms from registry entries.
+
+        This handles non-standard norms (EAB, EBGEO, EA-Pfähle, etc.)
+        that don't follow the DIN/EN/ISO naming pattern.
+
+        Returns:
+            Tuple of (registry_key, is_exact_match) or None
+        """
+        filename_upper = filename.upper()
+        for norm_key, norm in self.norms.items():
+            if not norm.search_terms:
+                continue
+            # Require ALL search terms to match (case-insensitive)
+            all_match = all(
+                term.upper() in filename_upper
+                for term in norm.search_terms[:2]  # Use first 2 terms (most specific)
+            )
+            if all_match:
+                return (norm_key, True)
+        return None
+
     def match_document(self, filename: str, path: str, item_id: str = "", web_url: str = "") -> Optional[SharePointMatch]:
         """
         Try to match a document to a norm in the registry.
@@ -254,13 +281,21 @@ class NormMatcher:
             SharePointMatch if document matches a norm, None otherwise
         """
         extracted = self._extract_norm_id(filename)
-        if not extracted:
-            return None
+        match_result = None
+        norm_id_for_match = filename  # Fallback display name
 
-        full_id, base_id = extracted
+        if extracted:
+            full_id, base_id = extracted
+            norm_id_for_match = full_id
+            match_result = self._find_matching_registry_key(full_id, base_id)
 
-        # Find matching registry key
-        match_result = self._find_matching_registry_key(full_id, base_id)
+        # Fallback: try search_terms for non-standard norms (EAB, EBGEO, etc.)
+        if not match_result:
+            match_result = self._match_by_search_terms(filename)
+            if match_result:
+                registry_key, _ = match_result
+                norm_id_for_match = self.norms[registry_key].id
+
         if not match_result:
             return None
 
@@ -271,7 +306,7 @@ class NormMatcher:
             path=path,
             item_id=item_id,
             web_url=web_url,
-            norm_id=full_id,
+            norm_id=norm_id_for_match,
             norm_key=registry_key,
             version_date=self._extract_version_date(filename),
             is_withdrawn=self._is_withdrawn(filename),

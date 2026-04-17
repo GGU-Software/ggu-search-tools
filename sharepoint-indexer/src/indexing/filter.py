@@ -95,7 +95,7 @@ class IndexingFilter:
         Returns:
             True if the file should be indexed
         """
-        if self.config.mode == "whitelist":
+        if self.config.mode in ("whitelist", "registry"):
             return self._check_whitelist(filename)
         else:
             return self._check_patterns(filename)

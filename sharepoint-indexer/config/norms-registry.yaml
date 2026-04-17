@@ -552,12 +552,377 @@ norms:
   indexed: true
   indexed_date: '2026-02-04'
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201991-1-1_ENTWURF_2023-04%20(Einwirkungen%20auf%20Tragwerke).pdf
+- id: DIN 18122-1
+  description: Zustandsgrenzen - Fließ- und Ausrollgrenze
+  category: lab_tests
+  priority: medium
+  status: withdrawn_only
+  indexed: false
+  sharepoint_file: DIN 18122-1_1997-07 zurückgezogen.pdf
+  sharepoint_path: Bibliothek/001_Normen/Normen zurückgezogen
+  item_id: 01F33FSKWQYCKR4OGXSVC33ZBMYRXUE7GP
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/Normen%20zur%C3%BCckgezogen/DIN%2018122-1_1997-07%20zur%C3%BCckgezogen.pdf
+  version_date: 1997-07
+  is_withdrawn: true
+- id: DIN 18130-1
+  description: Wasserdurchlässigkeitsbeiwert - Laborversuche
+  category: lab_tests
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN 18130-1.pdf
+  sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
+  item_id: 01F33FSKVGUJ5FNTOXPJGJRSXTGOM35FWI
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/000_Eingang/DIN%20von%20BN....werden%20noch%20einsortiert/DIN%2018130-1.pdf
+  version_date: null
+  is_withdrawn: false
+- id: DIN 18135
+  description: Eindimensionaler Kompressionsversuch (Oedometerversuch)
+  category: lab_tests
+  priority: medium
+  status: withdrawn_only
+  indexed: false
+  sharepoint_file: DIN 18135 Eindimensionaler Kompressionsversuch 2012_04 zurückgezogen.pdf
+  sharepoint_path: Bibliothek/001_Normen/Normen zurückgezogen
+  item_id: 01F33FSKQYQC26XOE625DJRGLF76UQRUCU
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/Normen%20zur%C3%BCckgezogen/DIN%2018135%20Eindimensionaler%20Kompressionsversuch%202012_04%20zur%C3%BCckgezogen.pdf
+  version_date: 2012-04
+  is_withdrawn: true
+- id: DIN 18137-2
+  description: Bestimmung der Scherfestigkeit - Triaxialversuch
+  category: lab_tests
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN 18137-2.pdf
+  sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
+  item_id: 01F33FSKTHOZSGUXNUBFD3L42EDSNQNBIZ
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/000_Eingang/DIN%20von%20BN....werden%20noch%20einsortiert/DIN%2018137-2.pdf
+  version_date: null
+  is_withdrawn: false
+- id: DIN EN 13286-2
+  description: Ungebundene und hydraulisch gebundene Gemische - Verdichtung (Proctorversuch)
+  category: lab_tests
+  priority: low
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN 13286-2_2013_02 (Bestimmung der Referenz-Trockendichte und
+    des Wassergehaltes-Proctorversuch).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  item_id: 01F33FSKX3245JEHVHZBB23UDHN7CIHFT5
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%2013286-2_2013_02%20(Bestimmung%20der%20Referenz-Trockendichte%20und%20des%20Wassergehaltes-Proctorversuch).pdf
+  version_date: 2013-02
+  is_withdrawn: false
+- id: DIN EN 17685-1
+  description: Glühverlust von Boden
+  category: lab_tests
+  priority: low
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN 17685-1__2023-04 (Bestimmung des Glühverlusts).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  item_id: 01F33FSKSI5FGWMUL5MBAYY63Y33MREGKI
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%2017685-1__2023-04%20(Bestimmung%20des%20Gl%C3%BChverlusts).pdf
+  version_date: 2023-04
+  is_withdrawn: false
+- id: DIN EN ISO 17892-8
+  description: Triaxialversuch - unkonsolidierter undränierter Versuch (UU)
+  category: lab_tests
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN ISO 17892-8_2018-07 (Unkonsolidierter undränierter Triaxialversuch).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  item_id: 01F33FSKWT4JU4GJ6RF5D3DO4HJDFB4WZ3
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-8_2018-07%20(Unkonsolidierter%20undr%C3%A4nierter%20Triaxialversuch).pdf
+  version_date: 2018-07
+  is_withdrawn: false
+- id: DIN EN ISO 17892-9
+  description: Triaxialversuch - konsolidierter Versuch (CU und CD)
+  category: lab_tests
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN ISO 17892-9_2018-07 (konsolidierte triaxiale Kompressionsversuche).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  item_id: 01F33FSKWMNKYAVDWADNFYTVAE6YUS4QTS
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-9_2018-07%20(konsolidierte%20triaxiale%20Kompressionsversuche).pdf
+  version_date: 2018-07
+  is_withdrawn: false
+- id: DIN EN ISO 17892-10
+  description: Direkter Scherversuch
+  category: lab_tests
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN ISO 17892-10_2019-04 (Direkte Scherversuche).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
+  item_id: 01F33FSKVKBWPTEWSCXJCZLGVM6OS47JV5
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN%20ISO/DIN%20EN%20ISO%2017892-10_2019-04%20(Direkte%20Scherversuche).pdf
+  version_date: 2019-04
+  is_withdrawn: false
+- id: ASTM D2487
+  description: USCS-Bodenklassifikation (Standard Practice for Classification of Soils)
+  category: classification
+  priority: low
+  status: not_found
+  indexed: false
+  search_terms:
+  - ASTM
+  - D2487
+  - USCS
+  sharepoint_file: null
+  sharepoint_path: null
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: DIN 4022
+  description: Baugrund - Benennen und Beschreiben von Boden und Fels (zurückgezogen)
+  category: field_testing
+  priority: low
+  status: withdrawn_only
+  indexed: false
+  sharepoint_file: DIN 4022 Benennen+Beschreiben von Boden und Fels 1987_09 zurückgezogen.pdf
+  sharepoint_path: Bibliothek/001_Normen/Normen zurückgezogen
+  item_id: 01F33FSKXR5TGLX7NHFNELLBV6VFX6YAOO
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/Normen%20zur%C3%BCckgezogen/DIN%204022%20Benennen+Beschreiben%20von%20Boden%20und%20Fels%201987_09%20zur%C3%BCckgezogen.pdf
+  version_date: null
+  is_withdrawn: true
+- id: OENORM B 4417
+  description: Geotechnik - Plattendruckversuch (österreichische Norm)
+  category: field_testing
+  priority: low
+  status: not_found
+  indexed: false
+  search_terms:
+  - OENORM
+  - B 4417
+  - Plattendruckversuch
+  sharepoint_file: null
+  sharepoint_path: null
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: VDI 4640
+  description: Thermische Nutzung des Untergrunds - Erdgekoppelte Wärmepumpenanlagen
+  category: field_testing
+  priority: low
+  status: found
+  indexed: false
+  search_terms:
+  - VDI
+  - '4640'
+  - Erdwärme
+  - Wärmepumpe
+  sharepoint_file: VDI-Richtlinie 4640 T. 1, Thermische Nutzung des Untergrundes,
+    12-2000.pdf
+  sharepoint_path: Bibliothek/G/Geothermie
+  item_id: 01F33FSKQX3UUNVCMEGRA2MJYWY5SJXUR7
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/G/Geothermie/VDI-Richtlinie%204640%20T.%201,%20Thermische%20Nutzung%20des%20Untergrundes,%2012-2000.pdf
+  version_date: null
+  is_withdrawn: false
+- id: DIN 4126
+  description: Nachweis der Standsicherheit von Schlitzwänden
+  category: geotechnical
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN 4126_2013-09 (Nachweis der Standsicherheit von Schlitzwänden).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  item_id: 01F33FSKT7DPL4YOGVGJE2SSEOQJ7K4IK5
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204126_2013-09%20(Nachweis%20der%20Standsicherheit%20von%20Schlitzw%C3%A4nden).pdf
+  version_date: 2013-09
+  is_withdrawn: false
+- id: DIN EN 1993-1-1
+  description: 'Eurocode 3: Stahlbau - Allgemeine Bemessungsregeln'
+  category: structural
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN 1993-1-1 NA_2010-12 (Bemessung und Konstruktion von Stahlbauten
+    - Tel 1-1 Allgemeine Bemessungsregeln und Regeln für den Hochbau).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  item_id: 01F33FSKVHKSYHSEH7WBDK4NCZGAYTLY5I
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201993-1-1%20NA_2010-12%20(Bemessung%20und%20Konstruktion%20von%20Stahlbauten%20-%20Tel%201-1%20Allgemeine%20Bemessungsregeln%20und%20Regeln%20f%C3%BCr%20den%20Hochbau).pdf
+  version_date: 2010-12
+  is_withdrawn: false
+- id: DIN EN 1993-1-6
+  description: 'Eurocode 3: Stahlbau - Festigkeit und Stabilität von Schalen'
+  category: structural
+  priority: low
+  status: not_found
+  indexed: false
+  sharepoint_file: null
+  sharepoint_path: null
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: DIN EN 1998-1
+  description: 'Eurocode 8: Auslegung von Bauwerken gegen Erdbeben'
+  category: eurocode
+  priority: medium
+  status: found
+  indexed: false
+  sharepoint_file: DIN EN 1998-1 NA_ 2023-11 (Nationaler Anhang-Auslegung von Bauwerken
+    gegen Erdbeben).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  item_id: 01F33FSKXOEBG5FJTXNRHJ6WK43H5LW7BL
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201998-1%20NA_%202023-11%20(Nationaler%20Anhang-Auslegung%20von%20Bauwerken%20gegen%20Erdbeben).pdf
+  version_date: 2023-11
+  is_withdrawn: false
+- id: OENORM EN 1997-1
+  description: Österreichische Ausprägung des Eurocode 7
+  category: eurocode
+  priority: medium
+  status: found
+  indexed: false
+  search_terms:
+  - OENORM
+  - EN 1997
+  - Eurocode 7
+  sharepoint_file: B 1997-1-1 Entwurf ÖNORM EC 7 Entwurf, Berechnung und Bemessung 2012_12.pdf
+  sharepoint_path: Bibliothek/001_Normen/Ö-Norm
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: EA-Pfähle
+  description: Empfehlungen des Arbeitskreises Pfähle (DGGT)
+  category: geotechnical
+  priority: medium
+  status: found
+  indexed: false
+  search_terms:
+  - EA-Pfähle
+  - EA Pfaehle
+  - Arbeitskreis Pfähle
+  - EAP
+  sharepoint_file: EA-Pfahle, 2. Auflage 2012.pdf
+  sharepoint_path: Bibliothek/E/EAP
+  item_id: null
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EAP/EA-Pfahle%2C%202.%20Auflage%202012.pdf
+  version_date: '2012'
+  is_withdrawn: false
+- id: EAB
+  description: Empfehlungen des Arbeitsausschusses Baugruben (DGGT)
+  category: geotechnical
+  priority: high
+  status: found
+  indexed: false
+  search_terms:
+  - EAB
+  - Arbeitsausschuss Baugruben
+  sharepoint_file: EAB 6.Auflage_2021.pdf
+  sharepoint_path: Bibliothek/E/EAB
+  item_id: null
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EAB/EAB%206.Auflage_2021.pdf
+  version_date: '2021'
+  is_withdrawn: false
+- id: EAU
+  description: Empfehlungen des Arbeitsausschusses Ufereinfassungen (DGGT)
+  category: geotechnical
+  priority: medium
+  status: found
+  indexed: false
+  search_terms:
+  - EAU
+  - Ufereinfassungen
+  sharepoint_file: EAU_2012_Auflage 11.pdf
+  sharepoint_path: Bibliothek/E/EAU
+  item_id: null
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EAU/EAU_2012_Auflage%2011.pdf
+  version_date: '2012'
+  is_withdrawn: false
+- id: EBGEO
+  description: Empfehlungen für Bewehrungen aus Geokunststoffen (DGGT)
+  category: geotechnical
+  priority: medium
+  status: found
+  indexed: false
+  search_terms:
+  - EBGEO
+  - Geokunststoffen
+  - Bewehrungen
+  sharepoint_file: EBGEO_2010_2.Auflage.pdf
+  sharepoint_path: Bibliothek/E/EBGEO
+  item_id: null
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EBGEO/EBGEO_2010_2.Auflage.pdf
+  version_date: '2010'
+  is_withdrawn: false
+- id: GDA
+  description: Empfehlungen des AK Geotechnik der Deponien und Altlasten (DGGT)
+  category: geotechnical
+  priority: low
+  status: not_found
+  indexed: false
+  search_terms:
+  - GDA
+  - Deponien
+  - Altlasten
+  sharepoint_file: null
+  sharepoint_path: null
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: DB-Richtlinie 836.4602A01
+  description: Filtersicherheit im Eisenbahnbau (Deutsche Bahn)
+  category: geotechnical
+  priority: low
+  status: not_found
+  indexed: false
+  search_terms:
+  - DB-Richtlinie
+  - '836'
+  - Filtersicherheit
+  - Eisenbahnbau
+  sharepoint_file: null
+  sharepoint_path: null
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: DWA-M511
+  description: Filtern mit Geokunststoffen (DWA Merkblatt)
+  category: geotechnical
+  priority: low
+  status: not_found
+  indexed: false
+  search_terms:
+  - DWA
+  - M511
+  - M 511
+  - Filtern
+  sharepoint_file: null
+  sharepoint_path: null
+  item_id: null
+  web_url: null
+  version_date: null
+  is_withdrawn: false
+- id: MMB 2013
+  description: Materialtransport im Boden (Merkblatt)
+  category: geotechnical
+  priority: low
+  status: found
+  indexed: false
+  search_terms:
+  - MMB
+  - Materialtransport
+  sharepoint_file: MMB_2013_Merkblatt Materialtransport_201303_Entwurf.pdf
+  sharepoint_path: Bibliothek/B/BAW-WSV/10_Merkblätter
+  item_id: 01F33FSKVEETTBZICRPJF2K5ID7VXIW7LT
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/BAW-WSV/10_Merkbl%C3%A4tter/MMB_2013_Merkblatt%20Materialtransport_201303_Entwurf.pdf
+  version_date: null
+  is_withdrawn: false
 scan_summary:
-  scan_date: '2026-02-04T16:58:11.390362'
-  total_norms: 39
-  found: 38
-  withdrawn_only: 1
-  not_found: 0
+  scan_date: '2026-04-17T12:04:21.569808'
+  total_norms: 65
+  found: 50
+  withdrawn_only: 4
+  not_found: 11
 index_summary:
   last_indexed: '2026-02-04'
   pinecone_assistant: ggu-techdoc-search
