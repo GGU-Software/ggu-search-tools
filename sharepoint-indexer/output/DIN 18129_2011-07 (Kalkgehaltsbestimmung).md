@@ -209,7 +209,7 @@ Tabelle 1—BenotigteTrockenmasse derProbe desBodenpulvers
 
 ANMERKUNGDiese Stoffmengenkonzentration wird z.B. erhalten, wenn drei Teilen destillierten Wassers ein Teil 25%igeSalzsaurezugegebenwird.
 
-Aufnahmegefaβ (Pos. Nr. 11) an den Messzylinder (Pos. Nr. 6) angeschlossen.Beim Aufdrucken des Gummistopfens aufdasGasentwicklungsgefaBkannsichderWasserspiegel in denGlaszylindern(Pos.Nr.1) und(Pos.Nr.6)verandern.In diesem Fall ist der Druckausgleich durch kurzes Offnen des Absperrhahnes (Pos.Nr.16)wiederherzustellen.
+Aufnahmegefaβ (Pos. Nr. 11) an den Messzylinder (Pos. Nr. 6) angeschlossen.Beim Aufdrucken des Gummistopfens aufdasGasentwicklungsgefaBkannsichderWasserspiegel in denGlaszylindern(Pos.Nr.1) und(Pos.Nr.6)verandern.In diesemFall ist der Druckausgleich durch kurzes Offnen des Absperrhahnes (Pos.Nr.16)wiederherzustellen.
 
 - 8.2.4  Das Gasentwicklungsgefaf (Pos. Nr. 10) wird so gekippt, dass die Salzsaure aus dem Reagenzglas s a sa  o  aa   pn   s s die Wassersaule aus dem Messzylinder (Pos. Nr. 6) in Richtung des offenen Zylinders (Pos. Nr. 1).
 - 8.2.5 Um ein Uberlaufen zu verhindern, wird aus dem Zylinder (Pos. Nr. 1) durch Offnen des Messzylinder (Pos. Nr. 6) muss jedoch wahrend der Gasentwicklung niedriger als im offenen Zylinder (Pos. Nr. 1) bleiben.
@@ -218,7 +218,7 @@ Aufnahmegefaβ (Pos. Nr. 11) an den Messzylinder (Pos. Nr. 6) angeschlossen.Beim
 
 ## 8.3  Naherungsweise Bestimmung des Kalzit- und Dolomitanteils
 
-ZurnaherungsweisenBestimmungdesKalzit-undDolomitanteils amGesamtkarbonatgehalt istvor dernach 8.2.7 beschriebenen Endablesung eine Zwischenablesung erforderlich. Bei dieser Ablesung muss die Wasserspiegeldifferenz ausgeglichen sein.An der Messskala wird in Hohe des Wasserspiegels das Gasvolumen
+ZurnaherungsweisenBestimmungdesKalzit-undDolomitanteils amGesamtkarbonatgehalt istvor dernach 8.2.7 beschriebenen Endablesung eine Zwischenablesung erforderlich. Bei dieser Ablesung muss die Wasserspiegeldifferenz ausgeglichen sein.An der Messskalawird inHohe desWasserspiegels das Gasvolumen
 
 ANMERKUNGDasVerfahrenberuhtdarauf,dassDolomit wesentlich langsamer alsKalzitvonHCI zersetztwird.Nach 30 s Saureeinwirkung ist zwar aller Kalzit aufgelost, jedoch nur ein geringer Anteil des Dolomits (etwa 2 % bis 3 %).
 
