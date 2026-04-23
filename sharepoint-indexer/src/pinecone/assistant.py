@@ -114,12 +114,20 @@ class PineconeAssistant:
             print(f"  Error deleting file {file_id}: {err.splitlines()[0]}")
             return False
 
-    def clear_all_files(self) -> int:
+    def clear_all_files(self, delete_delay: float = 1.0) -> int:
         """
         Delete all files from the assistant.
 
+        Pinecone's delete endpoint rate-limits aggressively at bulk scale
+        (observed: 429s after ~230 successive deletes). A small delay between
+        calls keeps the full clear within budget at ~1-2s per file.
+
+        Args:
+            delete_delay: Seconds to sleep between deletes. Raise if the
+                plan/region hits 429s at this rate.
+
         Returns:
-            Number of files deleted
+            Number of files successfully deleted.
         """
         files = self.list_files()
         deleted = 0
@@ -128,11 +136,15 @@ class PineconeAssistant:
 
         for file_info in files:
             file_id = file_info.id if hasattr(file_info, 'id') else file_info.get('id')
-            if file_id and self.delete_file(file_id):
+            if not file_id:
+                continue
+            if self.delete_file(file_id):
                 deleted += 1
-                print(".", end="", flush=True)
+                if deleted % 10 == 0:
+                    print(f"  {deleted}/{len(files)} deleted...", flush=True)
+            time.sleep(delete_delay)
 
-        print(f"\n  Deleted {deleted} files")
+        print(f"  Deleted {deleted} files")
         return deleted
 
     def upload_pdf(

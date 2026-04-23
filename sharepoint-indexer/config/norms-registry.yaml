@@ -569,7 +569,7 @@ norms:
   category: lab_tests
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN 18130-1.pdf
   sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
   item_id: 01F33FSKVGUJ5FNTOXPJGJRSXTGOM35FWI
@@ -593,7 +593,7 @@ norms:
   category: lab_tests
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN 18137-2.pdf
   sharepoint_path: Bibliothek/000_Eingang/DIN von BN....werden noch einsortiert
   item_id: 01F33FSKTHOZSGUXNUBFD3L42EDSNQNBIZ
@@ -605,7 +605,7 @@ norms:
   category: lab_tests
   priority: low
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN 13286-2_2013_02 (Bestimmung der Referenz-Trockendichte und
     des Wassergehaltes-Proctorversuch).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN
@@ -618,7 +618,7 @@ norms:
   category: lab_tests
   priority: low
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN 17685-1__2023-04 (Bestimmung des Glühverlusts).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN
   item_id: 01F33FSKSI5FGWMUL5MBAYY63Y33MREGKI
@@ -630,7 +630,7 @@ norms:
   category: lab_tests
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN ISO 17892-8_2018-07 (Unkonsolidierter undränierter Triaxialversuch).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
   item_id: 01F33FSKWT4JU4GJ6RF5D3DO4HJDFB4WZ3
@@ -642,7 +642,7 @@ norms:
   category: lab_tests
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN ISO 17892-9_2018-07 (konsolidierte triaxiale Kompressionsversuche).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
   item_id: 01F33FSKWMNKYAVDWADNFYTVAE6YUS4QTS
@@ -654,7 +654,7 @@ norms:
   category: lab_tests
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN ISO 17892-10_2019-04 (Direkte Scherversuche).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN ISO
   item_id: 01F33FSKVKBWPTEWSCXJCZLGVM6OS47JV5
@@ -710,7 +710,7 @@ norms:
   category: field_testing
   priority: low
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - VDI
   - '4640'
@@ -728,7 +728,7 @@ norms:
   category: geotechnical
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN 4126_2013-09 (Nachweis der Standsicherheit von Schlitzwänden).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN
   item_id: 01F33FSKT7DPL4YOGVGJE2SSEOQJ7K4IK5
@@ -740,7 +740,7 @@ norms:
   category: structural
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN 1993-1-1 NA_2010-12 (Bemessung und Konstruktion von Stahlbauten
     - Tel 1-1 Allgemeine Bemessungsregeln und Regeln für den Hochbau).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN
@@ -765,7 +765,7 @@ norms:
   category: eurocode
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   sharepoint_file: DIN EN 1998-1 NA_ 2023-11 (Nationaler Anhang-Auslegung von Bauwerken
     gegen Erdbeben).pdf
   sharepoint_path: Bibliothek/001_Normen/DIN EN
@@ -778,7 +778,7 @@ norms:
   category: eurocode
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - OENORM
   - EN 1997
@@ -908,7 +908,7 @@ norms:
   category: geotechnical
   priority: low
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - MMB
   - Materialtransport

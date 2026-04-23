@@ -49,14 +49,22 @@ class FilterConfig:
 
     @staticmethod
     def _load_registry_whitelist(registry_path: Path) -> list[str]:
-        """Load whitelist from norms registry."""
+        """
+        Load whitelist from norms registry.
+
+        Only norms with `indexed: true` are included. The `status` field
+        (found / withdrawn_only) indicates scanner results, not upload
+        intent — keeping the filter honest to the registry's `indexed`
+        signal means author-curated exclusions are actually honored.
+        """
         with open(registry_path, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f) or {}
 
         whitelist = []
         for norm_data in data.get('norms', []):
             status = norm_data.get('status', 'pending')
-            if status in ('found', 'withdrawn_only'):
+            indexed = norm_data.get('indexed', False)
+            if status in ('found', 'withdrawn_only') and indexed:
                 filename = norm_data.get('sharepoint_file')
                 if filename:
                     # Convert PDF filename to MD
