@@ -538,6 +538,90 @@ def upload_to_pinecone(documents: list[dict], dry_run: bool = True, clear_first:
             print(f"  - {error}")
 
 
+async def resolve_registry_paths(config_dir: Path) -> int:
+    """
+    Fill missing `item_id` entries in norms-registry.yaml using the
+    `sharepoint_path` + `sharepoint_file` fields.
+
+    This is the deterministic counterpart to `scan_norms`: the scanner's
+    fuzzy matcher occasionally misses documents (DGGT books in non-standard
+    subfolders, non-DIN prefixes, etc.). Whenever a registry entry carries
+    an explicit path+filename, we can look the item up directly via Graph
+    API and record the resolved `item_id` + `web_url`.
+
+    Run automatically at the end of `--scan-norms`; also available as
+    `--resolve-paths` for targeted reruns.
+
+    Returns the number of entries newly resolved.
+    """
+    from src.sharepoint.client import SharePointClient
+    import yaml
+
+    registry_path = config_dir / "norms-registry.yaml"
+    if not registry_path.exists():
+        print(f"Registry not found: {registry_path}")
+        return 0
+
+    with open(registry_path, "r", encoding="utf-8") as f:
+        registry = yaml.safe_load(f)
+
+    # Candidates: entries with explicit path+file but no item_id
+    candidates = []
+    for norm in registry.get("norms", []):
+        if norm.get("item_id"):
+            continue
+        path = norm.get("sharepoint_path")
+        fname = norm.get("sharepoint_file")
+        if path and fname:
+            candidates.append(norm)
+
+    if not candidates:
+        print("No registry entries need path resolution.")
+        return 0
+
+    print(f"\n{'=' * 60}")
+    print("RESOLVE REGISTRY PATHS")
+    print('=' * 60)
+    print(f"Candidates (have path+file, missing item_id): {len(candidates)}")
+    for n in candidates:
+        print(f"  - {n['id']:30s}  {n['sharepoint_path']}/{n['sharepoint_file']}")
+
+    print("\nConnecting to SharePoint...")
+    client = SharePointClient()
+    if not await client.initialize():
+        print("ERROR: Failed to connect to SharePoint")
+        return 0
+
+    resolved = 0
+    not_found = 0
+    for n in candidates:
+        result = await client.resolve_by_path(n["sharepoint_path"], n["sharepoint_file"])
+        if result and result.get("id"):
+            n["item_id"] = result["id"]
+            if result.get("webUrl") and not n.get("web_url"):
+                n["web_url"] = result["webUrl"]
+            n["status"] = "found"
+            # Registry entries with explicit path+file are author-curated;
+            # once the file is confirmed to exist, mark it indexable.
+            # Exclusion of specific docs belongs in indexing.yaml, not here.
+            n["indexed"] = True
+            resolved += 1
+            print(f"  [OK]  {n['id']}  -> {result['id'][:20]}...")
+        else:
+            not_found += 1
+            print(f"  [--]  {n['id']}  not found at declared path")
+
+    await client.close()
+
+    if resolved:
+        with open(registry_path, "w", encoding="utf-8") as f:
+            yaml.safe_dump(registry, f, allow_unicode=True, sort_keys=False)
+        print(f"\nRegistry updated: {registry_path}")
+
+    print(f"\nResolved: {resolved}   Not found: {not_found}")
+    return resolved
+
+
 async def scan_norms(config_dir: Path) -> None:
     """Scan SharePoint and match documents to norm registry."""
     import asyncio
@@ -633,6 +717,12 @@ async def scan_norms(config_dir: Path) -> None:
     # Generate whitelist preview
     whitelist = matcher.generate_whitelist()
     print(f"\nGenerated whitelist with {len(whitelist)} documents")
+
+    # Final pass: resolve any registry entries that have explicit path+file
+    # but were still missed by the fuzzy matcher. Prevents DGGT-book-style
+    # gaps from persisting across scans.
+    await resolve_registry_paths(config_dir)
+
     print("Run --prepare to see upload preview")
 
 
@@ -737,7 +827,8 @@ async def download_norms(config_dir: Path, downloads_dir: Path):
 
 def main():
     parser = argparse.ArgumentParser(description="SharePoint PDF RAG Pipeline")
-    parser.add_argument("--scan-norms", action="store_true", help="Scan SharePoint and match to norm registry")
+    parser.add_argument("--scan-norms", action="store_true", help="Scan SharePoint and match to norm registry (includes --resolve-paths as last step)")
+    parser.add_argument("--resolve-paths", action="store_true", help="Fill missing item_ids in registry by direct path lookup (for entries with sharepoint_path+file)")
     parser.add_argument("--download", action="store_true", help="Download matched PDFs from SharePoint")
     parser.add_argument("--extract", action="store_true", help="Extract PDFs to markdown")
     parser.add_argument("--validate", action="store_true", help="Validate extracted markdown")
@@ -764,6 +855,10 @@ def main():
     if args.scan_norms:
         import asyncio
         asyncio.run(scan_norms(config_dir))
+
+    elif args.resolve_paths:
+        import asyncio
+        asyncio.run(resolve_registry_paths(config_dir))
 
     elif args.download:
         import asyncio

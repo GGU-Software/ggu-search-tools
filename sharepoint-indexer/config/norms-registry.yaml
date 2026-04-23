@@ -783,10 +783,11 @@ norms:
   - OENORM
   - EN 1997
   - Eurocode 7
-  sharepoint_file: B 1997-1-1 Entwurf ÖNORM EC 7 Entwurf, Berechnung und Bemessung 2012_12.pdf
+  sharepoint_file: B 1997-1-1 Entwurf ÖNORM EC 7 Entwurf, Berechnung und Bemessung
+    2012_12.pdf
   sharepoint_path: Bibliothek/001_Normen/Ö-Norm
-  item_id: null
-  web_url: null
+  item_id: 01F33FSKTRYMEL5M33DBEKUSB6RUS35BBI
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/%C3%96-Norm/B%201997-1-1%20Entwurf%20%C3%96NORM%20EC%207%20Entwurf,%20Berechnung%20und%20Bemessung%202012_12.pdf
   version_date: null
   is_withdrawn: false
 - id: EA-Pfähle
@@ -794,7 +795,7 @@ norms:
   category: geotechnical
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - EA-Pfähle
   - EA Pfaehle
@@ -802,7 +803,7 @@ norms:
   - EAP
   sharepoint_file: EA-Pfahle, 2. Auflage 2012.pdf
   sharepoint_path: Bibliothek/E/EAP
-  item_id: null
+  item_id: 01F33FSKUPDY6SEEAHLVGYGIBKDY5E36FJ
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EAP/EA-Pfahle%2C%202.%20Auflage%202012.pdf
   version_date: '2012'
   is_withdrawn: false
@@ -811,13 +812,13 @@ norms:
   category: geotechnical
   priority: high
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - EAB
   - Arbeitsausschuss Baugruben
   sharepoint_file: EAB 6.Auflage_2021.pdf
   sharepoint_path: Bibliothek/E/EAB
-  item_id: null
+  item_id: 01F33FSKRGXOOKZVGFVFEYALIH2XVUETSB
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EAB/EAB%206.Auflage_2021.pdf
   version_date: '2021'
   is_withdrawn: false
@@ -826,13 +827,13 @@ norms:
   category: geotechnical
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - EAU
   - Ufereinfassungen
   sharepoint_file: EAU_2012_Auflage 11.pdf
   sharepoint_path: Bibliothek/E/EAU
-  item_id: null
+  item_id: 01F33FSKX7WM4MM5DFHZCI7BGWHGHPVDUT
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EAU/EAU_2012_Auflage%2011.pdf
   version_date: '2012'
   is_withdrawn: false
@@ -841,14 +842,14 @@ norms:
   category: geotechnical
   priority: medium
   status: found
-  indexed: false
+  indexed: true
   search_terms:
   - EBGEO
   - Geokunststoffen
   - Bewehrungen
   sharepoint_file: EBGEO_2010_2.Auflage.pdf
   sharepoint_path: Bibliothek/E/EBGEO
-  item_id: null
+  item_id: 01F33FSKR55QIUA2QNSFDK5ALU7547ADKH
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/E/EBGEO/EBGEO_2010_2.Auflage.pdf
   version_date: '2010'
   is_withdrawn: false

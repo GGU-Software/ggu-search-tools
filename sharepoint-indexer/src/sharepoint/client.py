@@ -217,6 +217,58 @@ class SharePointClient:
 
         return True
 
+    async def resolve_by_path(
+        self, drive_path: str, filename: str
+    ) -> Optional[dict]:
+        """
+        Resolve a file by path+filename to a Graph API DriveItem.
+
+        Useful when the scanner's fuzzy matching can't reach a document
+        (e.g. DGGT books in non-standard subfolders) but we know exactly
+        where it lives in SharePoint.
+
+        Args:
+            drive_path: Path within the drive, e.g. "Bibliothek/E/EAP"
+            filename: Exact filename, e.g. "EA-Pfahle, 2. Auflage 2012.pdf"
+
+        Returns:
+            Dict with {id, webUrl, size, name} on hit, None on 404 or error.
+        """
+        from urllib.parse import quote
+
+        await self.ensure_valid_token()
+
+        # Normalize: strip "Bibliothek/" prefix if the drive root already is
+        # the Bibliothek folder — the caller often stores the full visible
+        # path including the drive name, but Graph expects drive-root-relative.
+        # We keep the prefix because the configured drive name is "GGU"
+        # (not "Bibliothek"), so "Bibliothek/..." IS drive-root-relative.
+        full = f"{drive_path}/{filename}".strip("/")
+        encoded = quote(full, safe="/")
+        url = f"{self.GRAPH_API_BASE}/drives/{self.drive_id}/root:/{encoded}"
+
+        session = await self.get_session()
+        headers = self.get_auth_headers()
+
+        async with session.get(url, headers=headers) as response:
+            if response.status == 404:
+                logger.info(f"Path not found in SharePoint: {full}")
+                return None
+            if response.status != 200:
+                error_text = await response.text()
+                logger.error(
+                    f"Path resolution failed for {full}: {response.status} - {error_text}"
+                )
+                return None
+
+            data = await response.json()
+            return {
+                "id": data.get("id"),
+                "webUrl": data.get("webUrl"),
+                "size": data.get("size"),
+                "name": data.get("name"),
+            }
+
     async def download_file(self, item_id: str) -> Optional[bytes]:
         """
         Download file content by item ID.
