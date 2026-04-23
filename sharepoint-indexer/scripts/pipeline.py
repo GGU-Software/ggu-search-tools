@@ -17,6 +17,7 @@ Usage:
 
 import sys
 import re
+import time
 import argparse
 from pathlib import Path
 from datetime import datetime
@@ -269,6 +270,205 @@ def prepare_upload(output_dir: Path, config_path: Path = None) -> list[dict]:
     print(f"\nEstimated upload time: ~{estimated_minutes:.1f} minutes")
 
     return documents
+
+
+def upload_pdfs_to_pinecone(
+    downloads_dir: Path,
+    registry_path: Path,
+    assistant_name: str,
+    dry_run: bool = True,
+    clear_first: bool = False,
+    multimodal: bool = False,
+    only_missing: bool = False,
+):
+    """
+    Upload raw PDFs directly to a Pinecone Assistant.
+
+    Unlike `upload_to_pinecone` (which uploads pre-extracted markdown),
+    this sends the original PDF files. Pinecone parses them server-side
+    and preserves page boundaries, so context responses include
+    `reference.pages` for every snippet.
+
+    Args:
+        downloads_dir: Directory containing downloaded *.pdf files
+        registry_path: Path to norms-registry.yaml (provides web_url per file)
+        assistant_name: Pinecone assistant to upload to
+        dry_run: If True, list files only without uploading
+        clear_first: If True, delete all existing files in the assistant first
+    """
+    import yaml
+    from src.config import get_settings
+    from src.pinecone import PineconeAssistant
+
+    if not downloads_dir.exists():
+        print(f"Downloads directory not found: {downloads_dir}")
+        print("Run --download first to fetch PDFs from SharePoint.")
+        return
+
+    if not registry_path.exists():
+        print(f"Registry not found: {registry_path}")
+        return
+
+    # Build file -> web_url lookup; restrict to norms marked `indexed: true`
+    with open(registry_path, "r", encoding="utf-8") as f:
+        registry = yaml.safe_load(f)
+
+    url_by_file = {}
+    for norm in registry.get("norms", []):
+        pdf_file = norm.get("sharepoint_file")
+        web_url = norm.get("web_url")
+        indexed = norm.get("indexed", False)
+        if pdf_file and web_url and indexed:
+            url_by_file[pdf_file] = web_url
+
+    # Filter local PDFs to the ones present in the registry + indexed
+    pdfs = sorted(
+        p for p in downloads_dir.glob("*.pdf") if p.name in url_by_file
+    )
+
+    # Size sanity check (Pinecone standard plan: 100 MB per PDF)
+    MAX_MB = 100
+    oversized = [p for p in pdfs if p.stat().st_size > MAX_MB * 1024 * 1024]
+
+    print(f"\n{'=' * 60}")
+    print(f"PDF UPLOAD {'(DRY RUN)' if dry_run else ''}")
+    print(f"{'=' * 60}")
+    print(f"  Assistant: {assistant_name}")
+    print(f"  Source:    {downloads_dir}")
+    print(f"  PDFs:      {len(pdfs)}")
+    if clear_first:
+        print(f"  Clear existing: YES")
+
+    if oversized:
+        print(f"\n  [!!] {len(oversized)} PDF(s) exceed {MAX_MB} MB and will FAIL:")
+        for p in oversized:
+            mb = p.stat().st_size / (1024 * 1024)
+            print(f"    - {p.name} ({mb:.1f} MB)")
+
+    ready = [p for p in pdfs if p not in oversized]
+    if not ready:
+        print("\nNothing to upload.")
+        return
+
+    settings = get_settings()
+    if not settings.pinecone_api_key:
+        print("\nERROR: PINECONE_API_KEY not set in environment")
+        return
+
+    assistant = PineconeAssistant(
+        api_key=settings.pinecone_api_key,
+        assistant_name=assistant_name,
+    )
+
+    # Peek at current assistant state so dry-run preview is accurate.
+    # In --clear_first mode we treat it as "everything will be deleted".
+    skip_names: set[str] = set()
+    purge_entries: list = []  # (file_id, name) — non-Available ghosts to drop
+    if not clear_first:
+        existing = assistant.list_files()
+        for f in existing:
+            name = getattr(f, "name", None) or (f.get("name") if isinstance(f, dict) else None)
+            status = getattr(f, "status", None) or (f.get("status") if isinstance(f, dict) else None)
+            file_id = getattr(f, "id", None) or (f.get("id") if isinstance(f, dict) else None)
+            if not name:
+                continue
+            if status == "Available":
+                skip_names.add(name)
+            elif file_id:
+                purge_entries.append((file_id, name, status))
+
+    # Apply --only-missing narrowing before the preview
+    targets = ready
+    if only_missing:
+        targets = [p for p in ready if p.name not in skip_names]
+
+    print(f"\nFiles to upload:")
+    total_mb = 0.0
+    for p in targets:
+        mb = p.stat().st_size / (1024 * 1024)
+        total_mb += mb
+        print(f"  [{mb:5.1f} MB] {p.name}")
+    print(f"\n  Total:  {total_mb:.1f} MB across {len(targets)} file(s)")
+    if skip_names:
+        print(f"  Skipped (already Available): {len(skip_names)}")
+    if purge_entries:
+        print(f"  Will purge (not Available):  {len(purge_entries)}")
+        for _, n, s in purge_entries:
+            print(f"    [{s}] {n}")
+
+    if dry_run:
+        print("\n[DRY RUN] Re-run with --confirm to actually upload.")
+        if not clear_first and not only_missing:
+            print("Add --clear to delete existing files first (prevents duplicates).")
+        return
+
+    print("\n[CONFIRMED] Proceeding with upload...")
+
+    if clear_first:
+        print("\nClearing existing files...")
+        deleted = assistant.clear_all_files()
+        print(f"  Deleted {deleted} existing files")
+        skip_names = set()
+    elif purge_entries:
+        # Drop ProcessingFailed / transient entries so a re-upload can replace them
+        purged = 0
+        for file_id, _, _ in purge_entries:
+            if assistant.delete_file(file_id):
+                purged += 1
+        print(f"\nPurged {purged} non-Available entries.")
+
+    uploaded = 0
+    skipped = 0
+    failed = 0
+    errors: list[str] = []
+
+    # Optional narrowing: only upload files NOT currently in the assistant
+    targets = ready
+    if only_missing:
+        targets = [p for p in ready if p.name not in skip_names]
+        print(f"\n--only-missing filter: {len(targets)} PDFs remaining (was {len(ready)}).")
+
+    mode_label = "multimodal" if multimodal else "standard"
+    print(
+        f"\nStarting upload ({assistant.upload_delay:.1f}s delay per file, {mode_label} mode)..."
+    )
+    for i, pdf in enumerate(targets, 1):
+        if pdf.name in skip_names:
+            print(f"  [{i}/{len(targets)}] {pdf.name}... SKIP (already Available)")
+            skipped += 1
+            continue
+
+        print(f"  [{i}/{len(targets)}] {pdf.name}...", end=" ", flush=True)
+        result = assistant.upload_pdf(
+            pdf,
+            metadata={
+                "title": pdf.stem,
+                "source": "sharepoint",
+                "source_url": url_by_file[pdf.name],
+            },
+            multimodal=multimodal,
+        )
+        if result.success:
+            uploaded += 1
+            print("OK")
+        else:
+            failed += 1
+            errors.append(f"{pdf.name}: {result.error}")
+            print(f"FAIL ({result.error})")
+
+        if i < len(targets):
+            time.sleep(assistant.upload_delay)
+
+    print(f"\n{'=' * 60}")
+    print("UPLOAD COMPLETE")
+    print(f"{'=' * 60}")
+    print(f"  Uploaded: {uploaded}")
+    print(f"  Skipped:  {skipped}")
+    print(f"  Failed:   {failed}")
+    if errors:
+        print("\nErrors:")
+        for e in errors:
+            print(f"  - {e}")
 
 
 def upload_to_pinecone(documents: list[dict], dry_run: bool = True, clear_first: bool = False):
@@ -542,9 +742,13 @@ def main():
     parser.add_argument("--extract", action="store_true", help="Extract PDFs to markdown")
     parser.add_argument("--validate", action="store_true", help="Validate extracted markdown")
     parser.add_argument("--prepare", action="store_true", help="Prepare upload batch (dry run)")
-    parser.add_argument("--upload", action="store_true", help="Upload to Pinecone")
+    parser.add_argument("--upload", action="store_true", help="Upload markdown to Pinecone (legacy path)")
+    parser.add_argument("--upload-pdf", action="store_true", help="Upload raw PDFs to Pinecone (preserves pages)")
+    parser.add_argument("--assistant", default="ggu-techdoc-search-pdf", help="Target Pinecone assistant for --upload-pdf")
+    parser.add_argument("--multimodal", action="store_true", help="Enable multimodal processing (OCR + image captioning, needed for scanned PDFs)")
+    parser.add_argument("--only-missing", action="store_true", help="Upload only PDFs not already Available in the assistant")
     parser.add_argument("--clear", action="store_true", help="Clear existing files before upload (prevents duplicates)")
-    parser.add_argument("--confirm", action="store_true", help="Confirm upload (required with --upload)")
+    parser.add_argument("--confirm", action="store_true", help="Confirm upload (required with --upload/--upload-pdf)")
 
     args = parser.parse_args()
 
@@ -583,6 +787,17 @@ def main():
         if documents:
             upload_to_pinecone(documents, dry_run=not args.confirm, clear_first=args.clear)
 
+    elif args.upload_pdf:
+        upload_pdfs_to_pinecone(
+            downloads_dir=downloads_dir,
+            registry_path=config_dir / "norms-registry.yaml",
+            assistant_name=args.assistant,
+            dry_run=not args.confirm,
+            clear_first=args.clear,
+            multimodal=args.multimodal,
+            only_missing=args.only_missing,
+        )
+
     else:
         parser.print_help()
         print("\nWorkflow:")
@@ -595,6 +810,12 @@ def main():
         print("")
         print("Re-upload with updated metadata (e.g., after adding web_url):")
         print("  python scripts/pipeline.py --upload --clear --confirm  # Clear & re-upload")
+        print("")
+        print("PDF-based (parallel) assistant for page-aware retrieval:")
+        print("  python scripts/pipeline.py --upload-pdf                       # Preview upload")
+        print("  python scripts/pipeline.py --upload-pdf --confirm             # Upload PDFs")
+        print("  python scripts/pipeline.py --upload-pdf --clear --confirm     # Clear & re-upload")
+        print("  python scripts/pipeline.py --upload-pdf --assistant <name>    # Custom target")
 
 
 if __name__ == "__main__":
