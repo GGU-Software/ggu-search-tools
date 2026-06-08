@@ -167,6 +167,20 @@ python scripts/pipeline.py --upload --confirm # Actually upload
 
 ### Adding New Documents
 
+> **Fastest path — Claude Code skill `add-norm-to-search`.** It locates the norm
+> PDF in SharePoint (read-only), writes the registry entry, downloads, and uploads
+> to the PDF assistant. See
+> `infra/ggu-dev-tools/claude-code/skills/add-norm-to-search/` (SKILL.md +
+> references/workflow.md). The manual steps below are the underlying mechanics.
+
+> **Two assistants:** `--upload-pdf` feeds `ggu-techdoc-search-pdf` (raw PDFs,
+> page-aware — this is the corpus behind the `ggu-techdoc-search` MCP and
+> connie.ggu-connect.com). `--upload` feeds `ggu-techdoc-search` (docling markdown).
+> `--upload-pdf` is delta-aware (`--only-missing`); the markdown `--upload` is NOT —
+> never run a blanket `--upload` to add a single norm (it duplicates the corpus).
+> docling 2.98 note: the default parser segfaults on some PDFs — use
+> `enable_ocr=False` + `PyPdfiumDocumentBackend`.
+
 1. **Add norm to filter config** (`config/norms-filter.yaml`):
    ```yaml
    norms:
