@@ -918,6 +918,42 @@ norms:
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/BAW-WSV/10_Merkbl%C3%A4tter/MMB_2013_Merkblatt%20Materialtransport_201303_Entwurf.pdf
   version_date: null
   is_withdrawn: false
+- id: DIN 18533-1
+  description: Abdichtung von erdberührten Bauteilen
+  category: structural
+  priority: medium
+  status: found
+  indexed: true
+  sharepoint_file: DIN 18533-1_2017-07 (Abdichtung von erdberührten Bauteilen).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  item_id: 01F33FSKRL4NABVOWFNJD3XLWJ5WMBVOLQ
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018533-1_2017-07%20(Abdichtung%20von%20erdber%C3%BChrten%20Bauteilen).pdf
+  version_date: 2017-07
+  is_withdrawn: false
+- id: DIN 18533-2
+  description: Abdichtung mit bahnenförmigen Abdichtungsstoffen
+  category: structural
+  priority: medium
+  status: found
+  indexed: true
+  sharepoint_file: DIN 18533-2_2017-07 (Abdichtung Bahnen).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  item_id: 01F33FSKTSMVKO3JS22BBJJXA7E7NR2RMK
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018533-2_2017-07%20(Abdichtung%20Bahnen).pdf
+  version_date: 2017-07
+  is_withdrawn: false
+- id: DIN 18533-3
+  description: Abdichtung mit flüssig zu verarbeitenden Abdichtungsstoffen
+  category: structural
+  priority: medium
+  status: found
+  indexed: true
+  sharepoint_file: DIN 18533-3_2017-07 (Abdichtung Anstriche).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  item_id: 01F33FSKVGV6CQG7FHTJE3DETPZWCL2I45
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018533-3_2017-07%20(Abdichtung%20Anstriche).pdf
+  version_date: 2017-07
+  is_withdrawn: false
 scan_summary:
   scan_date: '2026-04-17T12:04:21.569808'
   total_norms: 65
