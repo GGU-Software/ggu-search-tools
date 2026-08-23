@@ -954,6 +954,90 @@ norms:
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018533-3_2017-07%20(Abdichtung%20Anstriche).pdf
   version_date: 2017-07
   is_withdrawn: false
+- id: KA6 Band 1
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 1 (Original; gescannt/kein Textlayer → Multimodal-Upload, 50-MB-Limit; gesplittet in Teile, daher nicht direkt indexiert)
+  category: classification
+  priority: high
+  status: found
+  indexed: false
+  sharepoint_file: KA 6 Band 1.pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQAH3B4IWGKRVH3E2XQRL2BY36Z
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%201.pdf
+  version_date: '2024'
+  is_withdrawn: false
+- id: KA6 Band 1 Teil 1 von 2
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 1, Teil 1 von 2 (Seiten 1-41; Split für 50-MB-Multimodal-Limit)
+  category: classification
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: KA 6 Band 1 (Teil 1 von 2).pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQAH3B4IWGKRVH3E2XQRL2BY36Z
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%201.pdf
+  version_date: '2024'
+  is_withdrawn: false
+- id: KA6 Band 1 Teil 2 von 2
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 1, Teil 2 von 2 (Seiten 42-82; Split für 50-MB-Multimodal-Limit)
+  category: classification
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: KA 6 Band 1 (Teil 2 von 2).pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQAH3B4IWGKRVH3E2XQRL2BY36Z
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%201.pdf
+  version_date: '2024'
+  is_withdrawn: false
+- id: KA6 Band 2
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 2 (Original; gescannt/kein Textlayer → Multimodal-Upload, 50-MB-Limit; gesplittet in Teile, daher nicht direkt indexiert)
+  category: classification
+  priority: high
+  status: found
+  indexed: false
+  sharepoint_file: KA 6 Band 2.pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQHPS7ZVSRZ2ZFY7PB446I2UHF3
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%202.pdf
+  version_date: '2024'
+  is_withdrawn: false
+- id: KA6 Band 2 Teil 1 von 3
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 2, Teil 1 von 3 (Seiten 1-66; Split für 50-MB-Multimodal-Limit)
+  category: classification
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: KA 6 Band 2 (Teil 1 von 3).pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQHPS7ZVSRZ2ZFY7PB446I2UHF3
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%202.pdf
+  version_date: '2024'
+  is_withdrawn: false
+- id: KA6 Band 2 Teil 2 von 3
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 2, Teil 2 von 3 (Seiten 67-131; Split für 50-MB-Multimodal-Limit)
+  category: classification
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: KA 6 Band 2 (Teil 2 von 3).pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQHPS7ZVSRZ2ZFY7PB446I2UHF3
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%202.pdf
+  version_date: '2024'
+  is_withdrawn: false
+- id: KA6 Band 2 Teil 3 von 3
+  description: Bodenkundliche Kartieranleitung (KA6), 6. Auflage — Band 2, Teil 3 von 3 (Seiten 132-197; Split für 50-MB-Multimodal-Limit)
+  category: classification
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: KA 6 Band 2 (Teil 3 von 3).pdf
+  sharepoint_path: Bibliothek/B/Bodenkunde
+  item_id: 01F33FSKQHPS7ZVSRZ2ZFY7PB446I2UHF3
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%202.pdf
+  version_date: '2024'
+  is_withdrawn: false
 scan_summary:
   scan_date: '2026-04-17T12:04:21.569808'
   total_norms: 65
