@@ -3,7 +3,7 @@
  * (Avoids SDK issues with Bun)
  */
 
-import { existsSync, readdirSync, readFileSync, createReadStream } from "fs";
+import { appendFileSync, existsSync, readdirSync, readFileSync, createReadStream } from "fs";
 import { join } from "path";
 
 // ============================================================================
@@ -14,6 +14,9 @@ interface Config {
   pinecone: {
     apiKey: string;
     assistantName: string;
+    // Regions-Host des Assistenten. EU: https://prod-eu-data.ke.pinecone.io
+    // Ablesen unter GET /assistant/assistants/<name>, Feld "host" -- nicht raten.
+    host?: string;
   };
   output: {
     directory: string;
@@ -121,14 +124,59 @@ function loadMarkdownFiles(outputDir: string, sourceName?: string): MarkdownFile
 // Pinecone REST API
 // ============================================================================
 
-const PINECONE_ASSISTANT_API = "https://prod-1-data.ke.pinecone.io";
+const DEFAULT_ASSISTANT_API = "https://prod-1-data.ke.pinecone.io";
 
 // Delay helper for rate limiting
 function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Namen der Dateien, die im Assistenten schon liegen.
+ *
+ * Ohne diese Abfrage legt jeder Wiederholungslauf Dubletten an: die API laedt eine Datei
+ * mit gleichem Namen einfach ein zweites Mal hoch. Bei knapp 10.000 Dateien und Stunden
+ * Laufzeit ist ein Abbruch der Normalfall -- und die Folge ist messbar. Im alten Index
+ * belegte dieselbe Datei zwei von acht Treffern.
+ */
+/**
+ * Lokaler Checkpoint: Namen aller Dateien, die dieser Rechner schon erfolgreich
+ * geladen hat. Zweite Quelle neben der Assistant-Dateiliste — s. Kopf dieser Datei.
+ */
+function loadCheckpoint(path: string): Set<string> {
+  if (!existsSync(path)) return new Set<string>();
+  return new Set(
+    readFileSync(path, "utf-8")
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean)
+  );
+}
+
+async function listExistingFiles(
+  api: string,
+  apiKey: string,
+  assistantName: string
+): Promise<Set<string>> {
+  const names = new Set<string>();
+  const response = await fetch(`${api}/assistant/files/${assistantName}`, {
+    headers: { "Api-Key": apiKey },
+  });
+  if (!response.ok) {
+    console.error(
+      `  Warnung: Dateiliste nicht abrufbar (${response.status}) -- es wird nichts uebersprungen`
+    );
+    return names;
+  }
+  const data = (await response.json()) as { files?: Array<{ name?: string }> };
+  for (const f of data.files ?? []) {
+    if (f.name) names.add(f.name);
+  }
+  return names;
+}
+
 async function uploadFile(
+  api: string,
   apiKey: string,
   assistantName: string,
   file: MarkdownFile,
@@ -149,7 +197,7 @@ ${file.content}`;
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const response = await fetch(
-        `${PINECONE_ASSISTANT_API}/assistant/files/${assistantName}`,
+        `${api}/assistant/files/${assistantName}`,
         {
           method: "POST",
           headers: {
@@ -207,7 +255,9 @@ async function main() {
     ? args[args.indexOf("--source") + 1]
     : undefined;
 
+  const api = config.pinecone.host ?? DEFAULT_ASSISTANT_API;
   console.log(`\nAssistant: ${config.pinecone.assistantName}`);
+  console.log(`Host:      ${api}`);
 
   // Load markdown files
   console.log("\nLoading markdown files...");
@@ -220,14 +270,37 @@ async function main() {
 
   console.log(`  Found ${files.length} files`);
 
+  // Bereits vorhandene Dateien ueberspringen -> der Lauf ist wiederholbar, ohne Dubletten.
+  const existing = await listExistingFiles(
+    api,
+    config.pinecone.apiKey,
+    config.pinecone.assistantName
+  );
+  const checkpointPath = join(config.output.directory, ".uploaded-" + config.pinecone.assistantName + ".log");
+  const checkpoint = loadCheckpoint(checkpointPath);
+  const pending = files.filter(
+    (f) => !existing.has(f.filename) && !checkpoint.has(f.filename)
+  );
+  console.log(
+    `  Bereits im Assistenten: ${existing.size}, im lokalen Checkpoint: ${checkpoint.size}`
+  );
+  console.log(
+    `  -> ${files.length - pending.length} uebersprungen, ${pending.length} zu laden`
+  );
+  if (pending.length === 0) {
+    console.log("\nNichts zu tun -- alle Dateien liegen bereits im Assistenten.");
+    return;
+  }
+
   // Upload to Pinecone
   console.log(`\nUploading to Pinecone Assistant...`);
 
   let uploaded = 0;
   let failed = 0;
 
-  for (const file of files) {
+  for (const file of pending) {
     const success = await uploadFile(
+      api,
       config.pinecone.apiKey,
       config.pinecone.assistantName,
       file
@@ -235,11 +308,14 @@ async function main() {
 
     if (success) {
       uploaded++;
+      // Sofort protokollieren, nicht am Ende: bei einem Abbruch (oder wenn der Rechner
+      // ausgeschaltet wird) ist genau das der Zustand, auf dem der naechste Lauf aufbaut.
+      appendFileSync(checkpointPath, file.filename + "\n", "utf-8");
     } else {
       failed++;
     }
 
-    process.stdout.write(`\r  Progress: ${uploaded + failed}/${files.length} (${uploaded} ok, ${failed} failed)`);
+    process.stdout.write(`\r  Progress: ${uploaded + failed}/${pending.length} (${uploaded} ok, ${failed} failed)`);
 
     // Small delay between uploads to avoid rate limiting
     await delay(500);

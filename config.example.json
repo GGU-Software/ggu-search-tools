@@ -4,13 +4,16 @@
   },
   "pinecone": {
     "apiKey": "pcsk_your-api-key-here",
-    "assistantName": "ggu-software-public-search"
+    "assistantName": "ggu-product-docs",
+    "host": "https://prod-eu-data.ke.pinecone.io"
   },
   "sources": [
     {
       "name": "product-website",
       "url": "https://www.ggu-software.com",
-      "excludePaths": ["/en/*"],
+      "excludePaths": [
+        "/en/*"
+      ],
       "limit": 500
     },
     {
