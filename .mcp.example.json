@@ -2,7 +2,7 @@
   "mcpServers": {
     "ggu-public-docs": {
       "type": "http",
-      "url": "https://prod-1-data.ke.pinecone.io/mcp/assistants/ggu-software-public-search",
+      "url": "https://prod-eu-data.ke.pinecone.io/mcp/assistants/ggu-product-docs",
       "headers": {
         "Authorization": "Bearer YOUR_PINECONE_API_KEY_HERE"
       }
