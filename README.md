@@ -8,8 +8,22 @@ This repository contains tools to index different documentation sources into Pin
 
 | Tool | Source | Technology | Target Assistant |
 |------|--------|------------|------------------|
-| **Web Crawler** | ggu-software.com, manuals | JS/Bun + Firecrawl | `ggu-software-public-search` |
-| **SharePoint Indexer** | SharePoint PDF Library | Python + Docling | `ggu-techdoc-search` |
+| **Web Crawler** | www.ggu-software.com (product pages) | JS/Bun + Firecrawl | `ggu-product-docs` |
+| **Manual sync** *(lives in `ggu-manuals`)* | Markdown master of the user manuals | Python | `ggu-product-docs` |
+| **SharePoint Indexer** | SharePoint PDF Library | Python + Docling | `ggu-techdoc-search-pdf` |
+
+> **The user manuals are no longer crawled.** They have a Markdown master in the
+> `ggu-manuals` repo, and that repo keeps the index in sync itself — on every merge to
+> `main`, via `pipeline/sync-index.py` and the `index-sync` workflow (DEV-4862). Crawling
+> them again would re-introduce exactly what DEV-4326 removed: a cookie banner, a "skip to
+> content" link and a k15t support link in every single document — measured at 1,000
+> characters of identical chrome per document across ~5,000 files.
+>
+> What the crawler still owns is the **product website**: 177 pages under
+> `www.ggu-software.com` that have no Markdown master. Both sets live side by side in the
+> same assistant and are told apart by the `source` metadata field, **not** by filename —
+> one of the 177 crawled pages happens to carry a `__` in its name just like the manual
+> pages do. The manual sync never deletes a file that lacks `source: manuals`.
 
 ## Architecture
 
@@ -34,8 +48,15 @@ This repository contains tools to index different documentation sources into Pin
          ┌──────────┴──────────┐            ┌─────────────┴─────────────┐
          │  GGU Websites       │            │  SharePoint Library       │
          │  - Product pages    │            │  - DIN Normen             │
-         │  - User manuals     │            │  - Technical docs         │
+         │    (177, no master) │            │  - Technical docs         │
          └─────────────────────┘            └───────────────────────────┘
+
+   The user manuals reach the same assistant from the other side, without
+   passing through this repo at all:
+
+         ggu-manuals (Markdown master, 9,611 pages DE+EN)
+              │  pipeline/sync-index.py — on every merge to main
+              └────────────────────────────────►  ggu-product-docs
 ```
 
 ---
@@ -61,25 +82,25 @@ cp config.example.json config.json
 ### Usage
 
 ```bash
-# Crawl websites
-bun run crawl
+# Crawl the product website
 bun run crawl --source product-website
-bun run crawl --source user-manuals
 
-# Upload to Pinecone
+# Upload to Pinecone (skips what is already there)
 bun run upload
-bun run upload --clear  # Clear existing first
-
-# Full sync
-bun run sync
 ```
 
 ### Configured Sources
 
 | Source | URL | Description |
 |--------|-----|-------------|
-| `product-website` | www.ggu-software.com | Product pages (German) |
-| `user-manuals` | manuals.ggu-software.com/ger/ | User documentation (~5,900 pages) |
+| `product-website` | www.ggu-software.com | Product pages (German), 177 pages — **the only source still crawled** |
+| ~~`user-manuals`~~ | ~~manuals.ggu-software.com/ger/~~ | **Retired** (DEV-4326). Superseded by the Markdown export in `ggu-manuals`; the source domain itself is being redirected away (DEV-4665). The entry stays in `config.example.json` only so an existing `config.json` keeps parsing — do not run it. |
+
+> ⚠️ `bun run upload --clear` wipes the assistant — **including the ~9,600 manual pages
+> that this repo did not put there.** Rebuilding them is a two-and-a-half-hour job
+> (`python pipeline/sync-index.py` over in `ggu-manuals`; the API accepts only about one
+> write per second and pushing harder measurably delivers *less*). Use `bun run upload`
+> without the flag: it skips whatever already exists.
 
 ---
 
@@ -228,8 +249,15 @@ After uploading, documentation is searchable in Claude Code via MCP servers.
 
 | Server | Assistant | Content | Documents |
 |--------|-----------|---------|-----------|
-| `ggu-public-docs` | `ggu-software-public-search` | Public website, user manuals | ~6,000 pages |
-| `ggu-techdoc-search` | `ggu-techdoc-search` | DIN/EN/ISO norms (internal) | 39 norms |
+| `ggu-public-docs` | `ggu-product-docs` (EU) | Product website + user manuals | ~9,800 pages |
+| `ggu-techdoc-search` | `ggu-techdoc-search-pdf` (EU) | DIN/EN/ISO norms (internal) | 39 norms |
+
+Both assistants live in the EU region, so the host is `prod-eu-data`, **not**
+`prod-1-data`. The product assistant was rebuilt from the Markdown master under the new
+name `ggu-product-docs` (DEV-4326). The old `ggu-software-public-search` on `prod-1-data`
+still answers — with a January 2026 crawl of the retired `manuals.ggu-software.com`, so
+its links are dead. Pointing every consumer at the new one and switching the old one off
+is DEV-4864.
 
 ### Setup
 
@@ -243,14 +271,14 @@ After uploading, documentation is searchable in Claude Code via MCP servers.
      "mcpServers": {
        "ggu-public-docs": {
          "type": "http",
-         "url": "https://prod-1-data.ke.pinecone.io/mcp/assistants/ggu-software-public-search",
+         "url": "https://prod-eu-data.ke.pinecone.io/mcp/assistants/ggu-product-docs",
          "headers": {
            "Authorization": "Bearer YOUR_PINECONE_API_KEY"
          }
        },
        "ggu-techdoc-search": {
          "type": "http",
-         "url": "https://prod-1-data.ke.pinecone.io/mcp/assistants/ggu-techdoc-search",
+         "url": "https://prod-eu-data.ke.pinecone.io/mcp/assistants/ggu-techdoc-search-pdf",
          "headers": {
            "Authorization": "Bearer YOUR_PINECONE_API_KEY"
          }
