@@ -1038,6 +1038,19 @@ norms:
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/B/Bodenkunde/KA%206%20Band%202.pdf
   version_date: '2024'
   is_withdrawn: false
+- id: DIN 4017:2006
+  description: Grundbruchberechnungen, zurückgezogene Fassung 2006-03 (ersetzt durch DIN 4017:2026-02); Basis der
+    Umsetzung in GGU-FOOTING, für den Fassungsvergleich indiziert
+  category: geotechnical
+  priority: medium
+  status: found
+  indexed: true
+  sharepoint_file: DIN 4017_2006-03 (Grundbruchwiderstand Flachgründungen).pdf
+  sharepoint_path: Bibliothek/001_Normen/Normen zurückgezogen
+  item_id: 01F33FSKSUGGTJSSWP7BGZHK27CAMNW6WK
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/Normen%20zur%C3%BCckgezogen/DIN%204017_2006-03%20(Grundbruchwiderstand%20Flachgr%C3%BCndungen).pdf
+  version_date: 2006-03
+  is_withdrawn: true
 scan_summary:
   scan_date: '2026-04-17T12:04:21.569808'
   total_norms: 65
