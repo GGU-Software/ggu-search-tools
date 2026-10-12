@@ -537,6 +537,20 @@ norms:
   indexed: true
   indexed_date: '2026-02-04'
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201992-1_2011-01%20(Stahlbetontragwerke,%20Bemessungsregeln).pdf
+- id: DIN EN 1992-1-1/NA
+  description: 'Nationaler Anhang zu Eurocode 2: Bemessung von Stahlbetontragwerken'
+  category: structural
+  priority: medium
+  status: found
+  sharepoint_file: DIN EN 1992-1-NA_2011-01 (Stahlbetontragwerke, Bemessungsregeln).pdf
+  validated: false
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  version_date: 2011-01
+  is_withdrawn: false
+  item_id: 01F33FSKUOG2O57UAGENBJP4GEV24ASBEK
+  indexed: true
+  indexed_date: '2026-10-12'
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201992-1-NA_2011-01%20(Stahlbetontragwerke,%20Bemessungsregeln).pdf
 - id: DIN 1055
   description: Einwirkungen auf Tragwerke
   category: structural
