@@ -72,6 +72,18 @@ norms:
   indexed: true
   indexed_date: '2026-02-04'
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204085_2017-08%20(Berechnung%20des%20Erddrucks).pdf
+- id: DIN 4085 Bbl 1
+  description: Berechnungsbeispiele zur DIN 4085:2011-05, u. a. Mittelwerte φm/cm bei geschichtetem Boden und
+    Erddruck aus Streifenlast mit variiertem Gleitflächenwinkel
+  category: geotechnical
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: DIN 4085_2011-12_Beiblatt 1 (Erddruck).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204085_2011-12_Beiblatt%201%20(Erddruck).pdf
+  version_date: 2011-12
+  is_withdrawn: false
 - id: DIN 4093
   description: Bemessung von verfestigten Bodenkörpern
   category: geotechnical
