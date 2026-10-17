@@ -1078,6 +1078,54 @@ norms:
   web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/Normen%20zur%C3%BCckgezogen/DIN%204017_2006-03%20(Grundbruchwiderstand%20Flachgr%C3%BCndungen).pdf
   version_date: 2006-03
   is_withdrawn: true
+- id: DIN 4020
+  description: Geotechnische Untersuchungen für bautechnische Zwecke (Geotechnischer Bericht A 7, Berichtsabschnitte A 7.2)
+  category: geotechnical
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: DIN 4020_2010-12 (Geotechn. Untersuchungen).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  item_id: 01F33FSKXMVH7D5QGLONGL774X2NPKC5KU
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%204020_2010-12%20(Geotechn.%20Untersuchungen).pdf
+  version_date: 2010-12
+  is_withdrawn: false
+- id: DIN EN 1997-2
+  description: Eurocode 7, Erkundung und Untersuchung des Baugrunds
+  category: eurocode
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: DIN EN 1997-2_2010-10 (Erkundung und Untersuchung des Baugrunds).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  item_id: 01F33FSKU5KU7WNHFMV5BYYGY3JAOS7ANS
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201997-2_2010-10%20(Erkundung%20und%20Untersuchung%20des%20Baugrunds).pdf
+  version_date: 2010-10
+  is_withdrawn: false
+- id: DIN EN 1997-2/NA
+  description: Nationaler Anhang zu Eurocode 7 Teil 2, Erkundung und Untersuchung des Baugrunds
+  category: eurocode
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: DIN EN 1997-2-NA_2010-12 (Erkundung und Untersuchung des Baugrunds).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN EN
+  item_id: 01F33FSKWBGCXTPZBYOBCZ5P7P4MJD63PL
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN%20EN/DIN%20EN%201997-2-NA_2010-12%20(Erkundung%20und%20Untersuchung%20des%20Baugrunds).pdf
+  version_date: 2010-12
+  is_withdrawn: false
+- id: DIN 18300
+  description: VOB/C, Erdarbeiten (Homogenbereiche)
+  category: geotechnical
+  priority: high
+  status: found
+  indexed: true
+  sharepoint_file: DIN 18300_2019-09 (Tech. Vertragsbedingungen - Erdarbeiten).pdf
+  sharepoint_path: Bibliothek/001_Normen/DIN
+  item_id: 01F33FSKUY4M6NDGCKGFBYPZXYWVNPRJVS
+  web_url: https://ggu.sharepoint.de/sites/GGUTeamSite/GGU/Bibliothek/001_Normen/DIN/DIN%2018300_2019-09%20(Tech.%20Vertragsbedingungen%20-%20Erdarbeiten).pdf
+  version_date: 2019-09
+  is_withdrawn: false
 scan_summary:
   scan_date: '2026-04-17T12:04:21.569808'
   total_norms: 65
